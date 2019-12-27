@@ -66,4 +66,17 @@ public class User implements Serializable {
     public void setIdcardname(String idcardname) {
         this.idcardname = idcardname;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", admin=" + admin +
+                ", idcardnumber='" + idcardnumber + '\'' +
+                ", idcardname='" + idcardname + '\'' +
+                '}';
+    }
 }

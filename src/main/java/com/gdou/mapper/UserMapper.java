@@ -1,7 +1,9 @@
 package com.gdou.mapper;
 
 import com.gdou.domain.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 /**
  * 用户Mapper
@@ -13,5 +15,5 @@ public interface UserMapper {
      * @param password
      * @return User
      */
-    User selectUserByUserNameAndPassword(@Param("username")String username,@Param("password")String password);
+    User getUserByUserNameAndPassword(@Param("username")String username,@Param("password")String password);
 }
