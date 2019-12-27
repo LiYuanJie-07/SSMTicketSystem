@@ -1,0 +1,69 @@
+package com.gdou.domain;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private Integer userid;
+    private String username;
+    private String password;
+    private String email;
+    private Integer admin;
+    private String idcardnumber;
+    private String idcardname;
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Integer admin) {
+        this.admin = admin;
+    }
+
+    public String getIdcardnumber() {
+        return idcardnumber;
+    }
+
+    public void setIdcardnumber(String idcardnumber) {
+        this.idcardnumber = idcardnumber;
+    }
+
+    public String getIdcardname() {
+        return idcardname;
+    }
+
+    public void setIdcardname(String idcardname) {
+        this.idcardname = idcardname;
+    }
+}
