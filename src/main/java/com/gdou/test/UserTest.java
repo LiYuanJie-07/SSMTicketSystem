@@ -1,6 +1,5 @@
 package com.gdou.test;
 
-import com.gdou.controller.BasicController;
 import com.gdou.domain.User;
 import com.gdou.service.UserService;
 import org.junit.Test;
@@ -8,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * 测试类
@@ -21,8 +22,12 @@ public class UserTest {
 
     @Test
     public void getUserTest(){
-        User user = userService.getUserByUserNameAndPassword("admin","e10adc3949ba59abbe56e057f20f883e");
-        System.out.println(user);
+        List<User> users = userService.getUserByUserNameAndPassword("admin","e10adc3949ba59abbe56e057f20f883e");
+        User user = null;
+        if (users != null){
+            user = users.get(0);
+        }
+        System.out.println(user.getIdcardname()+user.getIdcardnumber());
     }
 
 }
