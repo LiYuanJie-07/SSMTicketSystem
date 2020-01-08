@@ -25,11 +25,22 @@ public class UserServiceImpl implements UserService {
      * @return User
      */
     @Override
-    public List<User> getUserByUserNameAndPassword(String username, String password) {
+    public User getUserByUserNameAndPassword(String username, String password) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(username);
         criteria.andPasswordEqualTo(password);
-        return userMapper.selectByExample(example);
+        List<User> users = userMapper.selectByExample(example);
+        User user = users.get(0);
+        return user;
+    }
+
+    /**
+     * 根据用户id更新最近一次登陆时间
+     * @param user
+     */
+    @Override
+    public void updateLoginTime(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }

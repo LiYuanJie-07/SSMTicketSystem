@@ -14,5 +14,12 @@ public interface UserService {
      * @param username
      * @param password
      */
-    List<User> getUserByUserNameAndPassword(String username, String password);
+    User getUserByUserNameAndPassword(String username, String password);
+
+    /**
+     * 更新最近一次登录时间
+     * @param user
+     */
+    void updateLoginTime(User user);
+
 }

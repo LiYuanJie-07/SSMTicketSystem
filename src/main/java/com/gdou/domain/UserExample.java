@@ -716,6 +716,76 @@ public class UserExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+        public Criteria andLogintimeIsNull() {
+            addCriterion("logintime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeIsNotNull() {
+            addCriterion("logintime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeEqualTo(String value) {
+            addCriterion("logintime =", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeNotEqualTo(String value) {
+            addCriterion("logintime <>", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeGreaterThan(String value) {
+            addCriterion("logintime >", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeGreaterThanOrEqualTo(String value) {
+            addCriterion("logintime >=", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeLessThan(String value) {
+            addCriterion("logintime <", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeLessThanOrEqualTo(String value) {
+            addCriterion("logintime <=", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeLike(String value) {
+            addCriterion("logintime like", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeNotLike(String value) {
+            addCriterion("logintime not like", value, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeIn(List<String> values) {
+            addCriterion("logintime in", values, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeNotIn(List<String> values) {
+            addCriterion("logintime not in", values, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeBetween(String value1, String value2) {
+            addCriterion("logintime between", value1, value2, "logintime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogintimeNotBetween(String value1, String value2) {
+            addCriterion("logintime not between", value1, value2, "logintime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

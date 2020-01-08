@@ -11,6 +11,7 @@
     <result column="idcardname" jdbcType="VARCHAR" property="idcardname" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="logintime" jdbcType="VARCHAR" property="logintime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    userid, username, password, email, admin, idcardnumber, idcardname, phone, type
+    userid, username, password, email, admin, idcardnumber, idcardname, phone, type, logintime
   </sql>
   <select id="selectByExample" parameterType="com.gdou.domain.UserExample" resultMap="BaseResultMap">
     select
@@ -106,11 +107,12 @@
   <insert id="insert" parameterType="com.gdou.domain.User">
     insert into ts_user (userid, username, password, 
       email, admin, idcardnumber, 
-      idcardname, phone, type
+      idcardname, phone, type, logintime
       )
     values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{admin,jdbcType=INTEGER}, #{idcardnumber,jdbcType=VARCHAR}, 
-      #{idcardname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      #{idcardname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
+      #{logintime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.gdou.domain.User">
@@ -143,6 +145,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="logintime != null">
+        logintime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -171,6 +176,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -210,6 +218,9 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.logintime != null">
+        type = #{record.logintime,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +236,8 @@
       idcardnumber = #{record.idcardnumber,jdbcType=VARCHAR},
       idcardname = #{record.idcardname,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=VARCHAR},
+      logintime = #{record.logintime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +269,9 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="logintime != null">
+        logintime = #{logintime,jdbcType=VARCHAR},
+      </if>
     </set>
     where userid = #{userid,jdbcType=INTEGER}
   </update>
@@ -269,7 +284,8 @@
       idcardnumber = #{idcardnumber,jdbcType=VARCHAR},
       idcardname = #{idcardname,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      logintime = #{logintime,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

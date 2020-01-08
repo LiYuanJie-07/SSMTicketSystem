@@ -1,9 +1,11 @@
 package com.gdou.domain;
 
+import java.io.Serializable;
+
 /**
  * 用户实体类，用于封装返回的数据
  */
-public class User {
+public class User implements Serializable {
     private Integer userid;
 
     private String username;
@@ -21,6 +23,8 @@ public class User {
     private String phone;
 
     private String type;
+
+    private String logintime;
 
     public Integer getUserid() {
         return userid;
@@ -92,5 +96,29 @@ public class User {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public String getLogintime() {
+        return logintime;
+    }
+
+    public void setLogintime(String logintime) {
+        this.logintime = logintime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", admin=" + admin +
+                ", idcardnumber='" + idcardnumber + '\'' +
+                ", idcardname='" + idcardname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", logintime='" + logintime + '\'' +
+                '}';
     }
 }

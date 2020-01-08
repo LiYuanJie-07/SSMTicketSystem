@@ -48,6 +48,8 @@
         <!--文件上传解析器版本-->
         <commons.version>1.4</commons.version>
         <commons.io.version>2.6</commons.io.version>
+        <!--分页插件版本-->
+        <pagehelper.version>5.1.10</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -199,6 +201,13 @@
             <artifactId>commons-io</artifactId>
             <version>${commons.io.version}</version>
         </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

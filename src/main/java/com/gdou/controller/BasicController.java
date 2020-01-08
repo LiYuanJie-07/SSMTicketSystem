@@ -15,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 /**
  * 父控制器，用于抽取公共代码
@@ -62,28 +64,25 @@ public class BasicController {
     }
 
     /**
+     * 生成UUID 用于设置唯一标识
+     * @return UUID
+     */
+    public String getUUID(){
+        String uuid = UUID.randomUUID().toString();
+        uuid = uuid.replace("-","");
+        return uuid;
+    }
+
+    /**
      * 获取当前日期，把当前日期按照一定格式返回
      * @return 当前日期
      * @throws ParseException
      */
-    public Date getDate(){
+    public String getDate(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date changedate = null;
-        try{
-            changedate = df.parse(df.format(new Date()));
-        }catch (ParseException e){
-            log.error("获取当前日期错误：",e);
-        }
-        return changedate;
-    }
-
-    /**
-     * 把日期对象转化为字符串对象
-     */
-    public  String getStringDate(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(date);
-        return dateString;
+        String logintime = null;
+        logintime = df.format(new Date());
+        return logintime;
     }
 
     /**
