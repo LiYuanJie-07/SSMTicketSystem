@@ -15,8 +15,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 /**
  * 父控制器，用于抽取公共代码
@@ -30,7 +28,7 @@ public class BasicController {
      * JSON格式响应请求
      * 把数据以JSON格式返回客户端
      */
-    public void writeJson(String json, HttpServletResponse response){
+    public void writeJson(String json, HttpServletResponse response) {
         PrintWriter out = null;
         try {
             response.setContentType("text/html;charset=utf-8");
@@ -38,47 +36,39 @@ public class BasicController {
             out.print(json);
             out.flush();
             out.close();
-        }catch (Exception e){
-            if (out != null){
+        } catch (Exception e) {
+            if (out != null) {
                 out.close();
             }
             e.printStackTrace();
             StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw,true));
+            e.printStackTrace(new PrintWriter(sw, true));
         }
 
     }
 
     /**
      * 判断页面是否过期
+     *
      * @param request 客户端请求
      * @return boolean true:页面过期, false:页面没过期
      */
-    public boolean sessionTimeout(HttpServletRequest request){
+    public boolean sessionTimeout(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("id")==null || ((String)session.getAttribute("id")).equals("")){
+        if (session.getAttribute("id") == null || ((String) session.getAttribute("id")).equals("")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
-     * 生成UUID 用于设置唯一标识
-     * @return UUID
-     */
-    public String getUUID(){
-        String uuid = UUID.randomUUID().toString();
-        uuid = uuid.replace("-","");
-        return uuid;
-    }
-
-    /**
      * 获取当前日期，把当前日期按照一定格式返回
+     *
      * @return 当前日期
      * @throws ParseException
      */
-    public String getDate(){
+    public String getDate() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String logintime = null;
         logintime = df.format(new Date());
@@ -88,23 +78,23 @@ public class BasicController {
     /**
      * MD5加密算法 实现对密码加密
      */
-    public String md5(String str){
-        if (str == null){
+    public String md5(String str) {
+        if (str == null) {
             return "";
         }
         //获取摘要工具
         MessageDigest m = null;
-        try{
+        try {
             //MD5摘要工具
             m = MessageDigest.getInstance("MD5");
             //更新被文摘描述的位元组
             m.update(str.getBytes("UTF8"));
         }//捕获不支持摘要异常
-        catch (NoSuchAlgorithmException e){
+        catch (NoSuchAlgorithmException e) {
             //创建一个MD5消息文摘的时候出错
             e.printStackTrace();
         }//捕获不支持字符集异常
-        catch (UnsupportedEncodingException e){
+        catch (UnsupportedEncodingException e) {
             // 更新被文摘描述的位元组的时候出错
             e.printStackTrace();
         }
@@ -113,7 +103,7 @@ public class BasicController {
         // 创建结果字符串缓冲
         StringBuilder result = new StringBuilder("");
         //遍历文摘
-        for (int i=0; i<s.length; i++){
+        for (int i = 0; i < s.length; i++) {
             //进行十六进制转换
             result.append(Integer.toHexString((0x000000FF & s[i]) | 0xFFFFFF00).substring(6));
         }

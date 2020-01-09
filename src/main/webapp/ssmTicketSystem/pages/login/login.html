@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-CN">
 
 <head>
@@ -16,7 +15,8 @@
 
 <body>
 <div class="container">
-    <div class="form-signin">
+    <!-- 登录面板 -->
+    <div class="form-signin fade in">
         <div class="header">
             Welcome
         </div>
@@ -33,11 +33,23 @@
                 <input type="password" class="form-control" placeholder="密码" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <button class="btn btn-block btn-flat pull-right" id="btn-login">登录</button>
+            <button class="btn btn-block btn-flat pull-right" id="btn-login">
+                <span id="login-span">登 录</span>
+                <!-- loading动画效果-->
+                <div class="sk-wave hide">
+                    <div class="sk-wave-rect"></div>
+                    <div class="sk-wave-rect"></div>
+                    <div class="sk-wave-rect"></div>
+                    <div class="sk-wave-rect"></div>
+                    <div class="sk-wave-rect"></div>
+                </div>
+            </button>
         </form>
-
     </div>
+
 </div>
+<!-- 提示信息 -->
+<div class="alert alert-danger alert-dismissable in fade hide" role="alert" id="tips"></div>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="/ssmTicketSystem/static/js/jquery-3.4.1.js"></script>
