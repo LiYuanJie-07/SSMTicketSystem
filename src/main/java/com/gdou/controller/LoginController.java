@@ -32,9 +32,9 @@ public class LoginController extends BasicController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Msg login(String username, String password, HttpServletRequest request) {
-        //根据用户名和密码查询用户
+        //根据用户名/邮箱/手机和密码查询用户
         String md5Password = this.md5(password);
-        User user = userService.getUserByUserNameAndPassword(username, md5Password);
+        User user = userService.getUserByUserNameOrEamilOrPhoneAndPassword(username, md5Password);
         //获取session
         HttpSession session = request.getSession();
 
@@ -52,6 +52,41 @@ public class LoginController extends BasicController {
             session.setAttribute("user", user);
             //返回提示信息
             return Msg.success("登陆成功");
+        }
+
+    }
+
+    /**
+     * 校验注册用户名是否已经存在（已经被注册）
+     * @param username
+     * @return Msg
+     */
+    @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg checkUsernameIsExist(String username){
+        boolean exist = userService.checkUsername(username);
+        if (exist){
+            return Msg.success("用户名可用");
+        }else{
+            return Msg.fail("用户名已存在");
+        }
+    }
+
+    /**
+     * 用户注册方法
+     * @param user
+     * @return Msg
+     */
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg register(User user){
+        user.setPassword(this.md5(user.getPassword()));
+        user.setAdmin(0);
+        boolean reg = userService.addUser(user);
+        if (reg) {
+            return Msg.success("注册成功");
+        }else {
+            return Msg.fail("注册失败，请重新注册");
         }
 
     }

@@ -7,8 +7,6 @@ import com.gdou.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * 用户Service实现类
  */
@@ -19,23 +17,15 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     /**
-     * 根据用户名和密码查询用户
+     * 根据用户名/邮箱/手机和密码查询用户
      * @param username
      * @param password
      * @return User
      */
     @Override
-    public User getUserByUserNameAndPassword(String username, String password) {
-        UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-        criteria.andUsernameEqualTo(username);
-        criteria.andPasswordEqualTo(password);
-        List<User> users = userMapper.selectByExample(example);
+    public User getUserByUserNameOrEamilOrPhoneAndPassword(String username, String password) {
         User user = null;
-        //判断用户是否存在
-        if (users != null && users.size() != 0){//用户存在
-            user = users.get(0);
-        }
+        user = userMapper.getUserByUserNameOrEamilOrPhoneAndPassword(username,password);
         return user;
     }
 
@@ -47,4 +37,31 @@ public class UserServiceImpl implements UserService {
     public void updateLoginTime(User user) {
         userMapper.updateByPrimaryKeySelective(user);
     }
+
+    /**
+     * 校验注册用户名是否已经存在
+     * @param username
+     * @return true：当前用户名可用   false：当前用户名不可用
+     */
+    @Override
+    public boolean checkUsername(String username) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        long count = userMapper.countByExample(example);
+        return count == 0;
+    }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return true：注册成功 false：注册失败
+     */
+    @Override
+    public boolean addUser(User user) {
+        int count = userMapper.insertSelective(user);
+        return count != 0;
+    }
+
+
 }

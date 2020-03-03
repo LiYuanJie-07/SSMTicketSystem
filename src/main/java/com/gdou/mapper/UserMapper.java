@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
  * 用户Mapper接口
  */
 public interface UserMapper {
-    //查询所有用户总数
+    //查询符合条件的所有用户总数
     long countByExample(UserExample example);
 
     //删除用户
@@ -41,4 +41,7 @@ public interface UserMapper {
 
     //根据主键更新用户信息（全部字段，没有值的置为null）
     int updateByPrimaryKey(User record);
+
+    //根据用户名/邮箱/手机和密码查询用户
+    User getUserByUserNameOrEamilOrPhoneAndPassword(@Param("username")String username, @Param("password")String password);
 }
