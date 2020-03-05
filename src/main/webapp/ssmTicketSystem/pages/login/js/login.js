@@ -15,7 +15,6 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.code == 200) {
                     // 登录成功
-                    alert(response.msg);
                     window.location.replace("/index.jsp");
                 } else if (response.code == 100) {
                     // 登陆失败

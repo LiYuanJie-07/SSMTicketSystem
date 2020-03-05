@@ -91,5 +91,19 @@ public class LoginController extends BasicController {
 
     }
 
+    /**
+     *退出登录
+     * @return Msg
+     */
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg logout(HttpServletRequest request){
+        //获取session
+        HttpSession session = request.getSession();
+        //清空session
+        session.invalidate();
+        return Msg.success("成功退出系统");
+    }
+
 
 }
