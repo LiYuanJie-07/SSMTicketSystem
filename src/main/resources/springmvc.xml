@@ -21,10 +21,10 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--开启SpringMVC注解支持-->
+    <mvc:annotation-driven/>
+
     <!-- 设置不拦截静态资源 -->
     <mvc:resources mapping="*" location="/"/>
-
-    <!--开启SpringMVC注解支持-->
-    <mvc:annotation-driven />
 
 </beans>

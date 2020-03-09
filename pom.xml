@@ -50,6 +50,8 @@
         <commons.io.version>2.6</commons.io.version>
         <!--分页插件版本-->
         <pagehelper.version>5.1.10</pagehelper.version>
+        <!--shiro框架-->
+        <shiro.version>1.4.0</shiro.version>
     </properties>
 
     <dependencies>
@@ -206,6 +208,22 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
+        </dependency>
+        <!--shiro安全框架-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
         </dependency>
 
     </dependencies>

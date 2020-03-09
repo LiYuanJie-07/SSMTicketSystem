@@ -25,18 +25,4 @@ $(document).ready(function () {
         $("#layout").css("visibility", "visible");
     }, 800);
 
-    // 退出登录
-    $("#btn-logout").click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: "GET",
-            url: "/loginController/logout",
-            dataType: "json",
-            success: function (response) {
-                if (response.code == 200) {
-                    window.location.replace("/ssmTicketSystem/pages/login/login.html");
-                }
-            }
-        });
-    });
 });

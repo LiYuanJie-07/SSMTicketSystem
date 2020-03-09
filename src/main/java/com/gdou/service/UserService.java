@@ -9,20 +9,22 @@ import com.gdou.domain.User;
 public interface UserService {
 
     /**
-     * 根据用户名/邮箱/手机和密码查询用户
+     * 根据用户名/邮箱/手机查询用户
+     *
      * @param username
-     * @param password
      */
-    User getUserByUserNameOrEamilOrPhoneAndPassword(String username, String password);
+    User getUserByUserNameOrEamilOrPhone(String username);
 
     /**
      * 更新最近一次登录时间
+     *
      * @param user
      */
     void updateLoginTime(User user);
 
     /**
      * 校验注册用户名是否已经存在
+     *
      * @param username
      * @return true：当前用户名可用   false：当前用户名不可用
      */
@@ -30,6 +32,7 @@ public interface UserService {
 
     /**
      * 用户注册
+     *
      * @param user
      * @return true：注册成功 false：注册失败
      */

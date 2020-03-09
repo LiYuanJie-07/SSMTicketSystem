@@ -27,20 +27,20 @@
     </context:component-scan>
 
     <!--加载数据源数据-->
-    <context:property-override location="classpath:db.properties" />
+    <context:property-override location="classpath:db.properties"/>
     <!--配置c3p0数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" />
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
     <!--配置mybatis整合Spring的bean-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
         <!--自动扫描mybatis配置文件-->
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*.xml" />
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
     <!--jdbc事物管理器配置-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--启用支持annotation注解方式事物管理-->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
@@ -62,20 +62,23 @@
 
     <!--配置AOP织入-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.gdou.service.Impl.*ServiceImpl.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.gdou.service.Impl.*ServiceImpl.*(..))"/>
     </aop:config>
+
+    <!-- 导入shiro配置   -->
+    <import resource="spring-shiro.xml"/>
 
     <!-- 定义文件上传解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 设定默认编码 -->
-        <property name="defaultEncoding" value="UTF-8" />
+        <property name="defaultEncoding" value="UTF-8"/>
         <!-- 设定文件上传的最大值为5MB，5*1024*1024 <property name="maxUploadSize" value="5242880"></property>-->
 
         <!-- 设定文件上传时写入内存的最大值，如果小于这个参数不会生成临时文件，默认为10240 -->
-        <property name="maxInMemorySize" value="40960" />
+        <property name="maxInMemorySize" value="40960"/>
         <!-- 上传文件的临时路径 -->
 
         <!-- 延迟文件解析 -->
-        <property name="resolveLazily" value="true" />
+        <property name="resolveLazily" value="true"/>
     </bean>
 </beans>

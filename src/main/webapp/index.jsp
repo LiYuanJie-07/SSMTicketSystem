@@ -45,7 +45,7 @@
     <div class="top-btns">
         <span>欢迎您 ${sessionScope.user.username}</span>
         <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-lock'">修改密码</a>
-        <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'" id="btn-logout">退出系统</a>
+        <a href="/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'">退出系统</a>
     </div>
 </div>
 
@@ -139,35 +139,6 @@
 
 <div region="south" id="footer">云端购票系统 V1.0</div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //添加新的Tab页
-        $("#navmenu").on("click", "a[data-url]", function (e) {
-            e.preventDefault();
-            var tabTitle = $(this).text(); //获取菜单标题
-            var tabUrl = $(this).data("url"); //获取菜单url
-
-            if ($("#tabs").tabs("exists", tabTitle)) { //判断该Tab页是否已经存在
-                //tab页已存在，选中该tab页
-                $("#tabs").tabs("select", tabTitle);
-            } else {
-                //tab页不存在，添加该tab页
-                $("#tabs").tabs("add", {
-                    title: tabTitle,
-                    href: tabUrl,
-                    closable: true
-                });
-            }
-            $("#navmenu .active").removeClass("active");
-            $(this).parent().addClass("active");
-        });
-
-        //解决闪屏的问题
-        window.setTimeout(function () {
-            $("#layout").css("visibility", "visible");
-        }, 800);
-    });
-</script>
 </body>
 
 </html>

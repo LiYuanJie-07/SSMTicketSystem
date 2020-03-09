@@ -2,7 +2,9 @@ package com.gdou.mapper;
 
 import com.gdou.domain.User;
 import com.gdou.domain.UserExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -42,6 +44,4 @@ public interface UserMapper {
     //根据主键更新用户信息（全部字段，没有值的置为null）
     int updateByPrimaryKey(User record);
 
-    //根据用户名/邮箱/手机和密码查询用户
-    User getUserByUserNameOrEamilOrPhoneAndPassword(@Param("username")String username, @Param("password")String password);
 }

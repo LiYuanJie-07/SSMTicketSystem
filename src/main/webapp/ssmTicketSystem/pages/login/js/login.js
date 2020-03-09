@@ -247,7 +247,7 @@ $(document).ready(function () {
                     if (response.code == 200) {
                         alert(response.msg);
                         window.location.reload();
-                    }else if (response.code == 100) {
+                    } else if (response.code == 100) {
                         alert(response.msg);
                     }
                 }
