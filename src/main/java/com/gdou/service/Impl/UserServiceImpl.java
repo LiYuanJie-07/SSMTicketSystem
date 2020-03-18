@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByUserNameOrEamilOrPhone(String username) {
         UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
         example.or().andUsernameEqualTo(username);
         example.or().andEmailEqualTo(username);
         example.or().andPhoneEqualTo(username);

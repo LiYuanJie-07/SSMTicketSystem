@@ -111,4 +111,20 @@ public class BasicController {
         return result.toString();
     }
 
+    /**
+     * 将富文本转换为HTML
+     *
+     * @param oldStr
+     * @return String
+     */
+    public String TextToHtml(String oldStr) {
+        oldStr = oldStr.replace("&nbsp;", "   ");
+        oldStr = oldStr.replace("<", "&lt;");
+        oldStr = oldStr.replace(">", "&gt;");
+        oldStr = oldStr.replace("\n", "<br/>");
+        oldStr = oldStr.replace("\t", "&nbsp;&nbsp;&nbsp;");
+        oldStr = oldStr.replace("\"", "&quot;");
+        return oldStr;
+    }
+
 }

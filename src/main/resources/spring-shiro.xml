@@ -19,9 +19,18 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon：可以匿名访问 authc：认证后才可以访问 logout：退出登录-->
-                /index.jsp=authc
+                <!-- 静态资源 -->
+                /**/css/**=anon
+                /**/js/**=anon
+                /**/static/**=anon
+                <!-- 登录注册相关请求 -->
+                /loginController/login=anon
+                /loginController/checkUsername=anon
+                /loginController/register=anon
+                <!-- 登出 -->
                 /logout=logout
-                /**=anon
+                <!-- 其余都需要认证 -->
+                /**=authc
             </value>
         </property>
     </bean>

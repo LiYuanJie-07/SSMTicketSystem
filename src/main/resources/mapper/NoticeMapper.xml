@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdou.mapper.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.gdou.domain.Notice">
+    <id column="noticeid" jdbcType="INTEGER" property="noticeid" />
+    <result column="noticetitle" jdbcType="VARCHAR" property="noticetitle" />
+    <result column="noticetime" jdbcType="VARCHAR" property="noticetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gdou.domain.Notice">
+    <result column="noticetext" jdbcType="LONGVARCHAR" property="noticetext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    noticeid, noticetitle, noticetime
+  </sql>
+  <sql id="Blob_Column_List">
+    noticetext
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.gdou.domain.NoticeExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ts_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.gdou.domain.NoticeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ts_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ts_notice
+    where noticeid = #{noticeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ts_notice
+    where noticeid = #{noticeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.domain.NoticeExample">
+    delete from ts_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.domain.Notice">
+    insert into ts_notice (noticeid, noticetitle, noticetime, 
+      noticetext)
+    values (#{noticeid,jdbcType=INTEGER}, #{noticetitle,jdbcType=VARCHAR}, #{noticetime,jdbcType=VARCHAR},
+      #{noticetext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.domain.Notice">
+    insert into ts_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noticeid != null">
+        noticeid,
+      </if>
+      <if test="noticetitle != null">
+        noticetitle,
+      </if>
+      <if test="noticetime != null">
+        noticetime,
+      </if>
+      <if test="noticetext != null">
+        noticetext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noticeid != null">
+        #{noticeid,jdbcType=INTEGER},
+      </if>
+      <if test="noticetitle != null">
+        #{noticetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetime != null">
+        #{noticetime,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetext != null">
+        #{noticetext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.domain.NoticeExample" resultType="java.lang.Long">
+    select count(*) from ts_notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ts_notice
+    <set>
+      <if test="record.noticeid != null">
+        noticeid = #{record.noticeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.noticetitle != null">
+        noticetitle = #{record.noticetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noticetime != null">
+        noticetime = #{record.noticetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noticetext != null">
+        noticetext = #{record.noticetext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update ts_notice
+    set noticeid = #{record.noticeid,jdbcType=INTEGER},
+      noticetitle = #{record.noticetitle,jdbcType=VARCHAR},
+      noticetime = #{record.noticetime,jdbcType=VARCHAR},
+      noticetext = #{record.noticetext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ts_notice
+    set noticeid = #{record.noticeid,jdbcType=INTEGER},
+      noticetitle = #{record.noticetitle,jdbcType=VARCHAR},
+      noticetime = #{record.noticetime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.domain.Notice">
+    update ts_notice
+    <set>
+      <if test="noticetitle != null">
+        noticetitle = #{noticetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetime != null">
+        noticetime = #{noticetime,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetext != null">
+        noticetext = #{noticetext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where noticeid = #{noticeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gdou.domain.Notice">
+    update ts_notice
+    set noticetitle = #{noticetitle,jdbcType=VARCHAR},
+      noticetime = #{noticetime,jdbcType=VARCHAR},
+      noticetext = #{noticetext,jdbcType=LONGVARCHAR}
+    where noticeid = #{noticeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.domain.Notice">
+    update ts_notice
+    set noticetitle = #{noticetitle,jdbcType=VARCHAR},
+      noticetime = #{noticetime,jdbcType=VARCHAR}
+    where noticeid = #{noticeid,jdbcType=INTEGER}
+  </update>
+</mapper>

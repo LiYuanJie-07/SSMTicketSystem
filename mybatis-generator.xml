@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
         <!--指定每张表的生成策略-->
-        <table tableName="ts_user" domainObjectName="User" >
+        <table tableName="ts_notice" domainObjectName="Notice" >
         </table>
 
     </context>

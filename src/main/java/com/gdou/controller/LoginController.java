@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  * 登录Controller
  */
 @Controller
-@RequestMapping("/loginController")
+@RequestMapping(value = "/loginController")
 public class LoginController extends BasicController {
     //注入UserService
     @Autowired
@@ -66,8 +66,7 @@ public class LoginController extends BasicController {
         }
         User user = userService.getUserByUserNameOrEamilOrPhone(username);
         //更新最近一次登录时间
-        String loginTime = this.getDate();
-        user.setLogintime(loginTime);
+        user.setLogintime(this.getDate());
         userService.updateLoginTime(user);
         //获取session
         HttpSession session = request.getSession();
@@ -82,9 +81,10 @@ public class LoginController extends BasicController {
      * @param username
      * @return Msg
      */
-    @RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkUsername", method = RequestMethod.GET)
     @ResponseBody
     public Msg checkUsernameIsExist(String username) {
+        //查询该用户名是否存在
         boolean exist = userService.checkUsername(username);
         if (exist) {
             return Msg.success("用户名可用");
@@ -102,8 +102,11 @@ public class LoginController extends BasicController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Msg register(User user) {
+        // 对密码进行MD5加密
         user.setPassword(this.md5(user.getPassword()));
+        //默认设置不是管理员
         user.setAdmin(0);
+        //注册
         boolean reg = userService.addUser(user);
         if (reg) {
             return Msg.success("注册成功");

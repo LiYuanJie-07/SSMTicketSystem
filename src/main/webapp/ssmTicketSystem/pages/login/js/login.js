@@ -85,13 +85,15 @@ $(document).ready(function () {
         e.preventDefault();
         // 校验注册用户名是否为空
         if ($("#register-username").val() == '') {
+            $("#register-username").parent().removeClass('has-success');
             $("#register-username").parent().addClass('has-error');
+            $("#register-username-tips").css("color", "darkred");
             $("#register-username-tips").text("用户名不能为空");
             regRegisterUsername = false;
         } else {
             // 发送ajax请求校验用户名是否已经存在
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/loginController/checkUsername",
                 data: {
                     "username": this.value
@@ -108,7 +110,9 @@ $(document).ready(function () {
                         regRegisterUsername = true;
                     } else if (response.code == 100) {
                         // 用户名已存在
+                        $("#register-username").parent().removeClass('has-success');
                         $("#register-username").parent().addClass('has-error');
+                        $("#register-username-tips").css("color", "darkred");
                         $("#register-username-tips").empty();
                         $("#register-username-tips").text(response.msg);
                         regRegisterUsername = false;
@@ -235,7 +239,7 @@ $(document).ready(function () {
     $("#btn-register").click(function (e) {
         e.preventDefault();
         // 判断信息是否填写完整
-        if (regRsgisterPassword && regRegisterEmail && regRegisterIdcardnumber &&
+        if (regRegisterUsername && regRsgisterPassword && regRegisterEmail && regRegisterIdcardnumber &&
             regRegisterIdcardname && regRegisterPhone && regRegisterType) {
             // 信息填写完整，进行注册
             $.ajax({
