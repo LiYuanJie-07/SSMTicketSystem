@@ -52,6 +52,10 @@
         <pagehelper.version>5.1.10</pagehelper.version>
         <!--shiro框架-->
         <shiro.version>1.4.0</shiro.version>
+        <!-- 发送邮件jar包 -->
+        <mail.version>1.4.7</mail.version>
+
+
     </properties>
 
     <dependencies>
@@ -224,6 +228,12 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
+        </dependency>
+        <!-- 发送邮件jar包 -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
         </dependency>
 
     </dependencies>
