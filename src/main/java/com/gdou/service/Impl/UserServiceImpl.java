@@ -19,9 +19,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     /**
-     * 根据用户名/邮箱/手机和密码查询用户
+     * 根据用户名/邮箱/手机号查询用户
      *
-     * @param username
+     * @param username 用户名/邮箱/手机号
      * @return User
      */
     @Override
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 根据用户id更新最近一次登陆时间
      *
-     * @param user
+     * @param user 用户信息
      */
     @Override
     public void updateLoginTime(User user) {
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 校验注册用户名是否已经存在
      *
-     * @param username
+     * @param username 用户名
      * @return true：当前用户名可用   false：当前用户名不可用
      */
     @Override
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户注册
      *
-     * @param user
+     * @param user 用户信息
      * @return true：注册成功 false：注册失败
      */
     @Override

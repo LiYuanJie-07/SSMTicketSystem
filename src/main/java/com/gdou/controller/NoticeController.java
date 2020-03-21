@@ -41,7 +41,7 @@ public class NoticeController extends BasicController {
     /**
      * 新增公告
      *
-     * @param notice
+     * @param notice 公告信息
      * @return Msg
      */
     @RequestMapping(value = "/addNotice", method = RequestMethod.POST)
@@ -63,7 +63,7 @@ public class NoticeController extends BasicController {
     /**
      * 修改公告
      *
-     * @param notice
+     * @param notice 公告信息
      * @return Msg
      */
     @RequestMapping(value = "/editNotice", method = RequestMethod.POST)
@@ -86,7 +86,7 @@ public class NoticeController extends BasicController {
     /**
      * 删除公告
      *
-     * @param noticeid
+     * @param noticeid 公告id
      * @return Msg
      */
     @RequestMapping(value = "/deleteNotice", method = RequestMethod.GET)

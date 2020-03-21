@@ -70,9 +70,9 @@ public class BasicController {
      */
     public String getDate() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String logintime = null;
-        logintime = df.format(new Date());
-        return logintime;
+        String dateTime = null;
+        dateTime = df.format(new Date());
+        return dateTime;
     }
 
     /**
@@ -114,7 +114,7 @@ public class BasicController {
     /**
      * 将富文本转换为HTML
      *
-     * @param oldStr
+     * @param oldStr 富文本
      * @return String
      */
     public String TextToHtml(String oldStr) {

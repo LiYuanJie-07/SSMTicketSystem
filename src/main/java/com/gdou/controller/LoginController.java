@@ -30,9 +30,9 @@ public class LoginController extends BasicController {
     /**
      * 登录方法
      *
-     * @param username
-     * @param password
-     * @param request
+     * @param username 用户名/邮箱/手机号
+     * @param password 密码
+     * @param request  请求
      * @return Msg
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -78,7 +78,7 @@ public class LoginController extends BasicController {
     /**
      * 校验注册用户名是否已经存在（已经被注册）
      *
-     * @param username
+     * @param username 用户名
      * @return Msg
      */
     @RequestMapping(value = "/checkUsername", method = RequestMethod.GET)
@@ -96,7 +96,7 @@ public class LoginController extends BasicController {
     /**
      * 用户注册方法
      *
-     * @param user
+     * @param user 用户信息
      * @return Msg
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)

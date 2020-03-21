@@ -34,7 +34,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * 新增公告
      *
-     * @param notice
+     * @param notice 公告信息
      * @return true：新增公告成功  false：新增公告失败
      */
     @Override
@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * 修改公告
      *
-     * @param notice
+     * @param notice 公告信息
      * @return true：修改公告成功  false：修改公告失败
      */
     @Override
@@ -59,7 +59,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * 删除公告
      *
-     * @param noticeid
+     * @param noticeid 公告id
      * @return true：删除公告成功  false：删除公告失败
      */
     @Override
