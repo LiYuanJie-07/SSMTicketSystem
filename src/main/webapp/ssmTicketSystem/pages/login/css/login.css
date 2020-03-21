@@ -1,7 +1,7 @@
 body {
     padding-top: 60px;
     padding-bottom: 20px;
-    background: url(../../../static/images/login-bg.jpg);
+    background: url(../../../static/images/login-bg.jpg) no-repeat;
     background-size: 100%;
 }
 
@@ -235,5 +235,3 @@ body {
 .reg-form-box-main label {
     color: #666;
 }
-
-
