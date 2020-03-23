@@ -87,7 +87,7 @@ To change this template use File | Settings | File Templates.
                     <div class="form-group">
                         <label class="col-xs-4 col-sm-3 control-label"><span class="red-star">*</span>登陆密码：</label>
                         <div class="col-xs-7 col-sm-6">
-                            <input type="text" class="form-control" placeholder="密码是6-12位数字或字母"
+                            <input type="password" class="form-control" placeholder="密码是6-12位数字或字母"
                                    id="register-password1">
                         </div>
                         <span class="help-block" id="register-password1-tips" style="color: darkred;"></span>
@@ -95,7 +95,7 @@ To change this template use File | Settings | File Templates.
                     <div class="form-group">
                         <label class="col-xs-4 col-sm-3 control-label"><span class="red-star">*</span>确认密码：</label>
                         <div class="col-xs-7 col-sm-6">
-                            <input type="text" class="form-control" placeholder="再次输入您的登陆密码" name="password"
+                            <input type="password" class="form-control" placeholder="再次输入您的登陆密码" name="password"
                                    id="register-password2">
                         </div>
                         <span class="help-block" id="register-password2-tips" style="color: darkred;"></span>

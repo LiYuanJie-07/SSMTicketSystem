@@ -1,7 +1,5 @@
-package com.gdou.Utils;
+package com.gdou.Utilsa;
 
-
-import org.springframework.stereotype.Component;
 
 import java.util.Random;
 

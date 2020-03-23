@@ -1,4 +1,4 @@
-package com.gdou.Utils;
+package com.gdou.Utilsa;
 
 
 import com.sun.mail.util.MailSSLSocketFactory;

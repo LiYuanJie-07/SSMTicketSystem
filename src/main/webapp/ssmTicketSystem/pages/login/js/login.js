@@ -123,34 +123,47 @@ $(document).ready(function () {
     });
 
     // 校验注册输入密码格式
-    var regRsgisterPassword = false; // 注册密码校验标志
+    var regRsgisterPassword1 = false; // 注册密码校验标志
     $("#register-password1").change(function (e) {
         e.preventDefault();
-        if (!login_password.test($("#register-password1").val())) {
+        //获取密码
+        var password = $("#register-password1").val()
+        //校验
+        if (password === "" || password === null || password.length === 0) {
+            $("#register-password1").parent().removeClass('has-success');
+            $("#register-password1").parent().addClass('has-error');
+            $("register-password1-tips").text("密码不能为空");
+            regRsgisterPassword1 = false;
+        } else if (!login_password.test(password)) {
+            $("#register-password1").parent().removeClass('has-success');
             $("#register-password1").parent().addClass('has-error');
             $("#register-password1-tips").text("密码格式不正确");
-            regRsgisterPassword = false;
+            regRsgisterPassword1 = false;
         } else {
             $("#register-password1").parent().removeClass('has-error');
             $("#register-password1-tips").empty();
             $("#register-password1").parent().addClass('has-success');
-            regRsgisterPassword = true;
+            regRsgisterPassword1 = true;
         }
-
     });
 
     // 校验注册确认密码是否一致
+    var regRsgisterPassword2 = false; // 确认密码校验标志
     $("#register-password2").blur(function (e) {
         e.preventDefault();
-        if ($("#register-password2").val() != $("#register-password1").val()) {
+        //获取密码
+        var password = $('#register-password2').val();
+        //校验
+        if (password != $("#register-password1").val() || password === "" || password === null || password.length === 0) {
+            $("#register-password2").parent().removeClass('has-success');
             $("#register-password2").parent().addClass('has-error');
             $("#register-password2-tips").text("两次输入密码不一致");
-            regRsgisterPassword = false;
-        } else if ($("#register-password2").val() == $("#register-password1").val()) {
+            regRsgisterPassword2 = false;
+        } else if (password == $("#register-password1").val() && regRsgisterPassword1) {
             $("#register-password2").parent().removeClass('has-error');
             $("#register-password2-tips").empty();
             $("#register-password2").parent().addClass('has-success');
-            regRsgisterPassword = true;
+            regRsgisterPassword2 = true;
         }
     });
 
@@ -239,8 +252,8 @@ $(document).ready(function () {
     $("#btn-register").click(function (e) {
         e.preventDefault();
         // 判断信息是否填写完整
-        if (regRegisterUsername && regRsgisterPassword && regRegisterEmail && regRegisterIdcardnumber &&
-            regRegisterIdcardname && regRegisterPhone && regRegisterType) {
+        if (regRegisterUsername && regRsgisterPassword1 && regRsgisterPassword2 && regRegisterEmail &&
+            regRegisterIdcardnumber && regRegisterIdcardname && regRegisterPhone && regRegisterType) {
             // 信息填写完整，进行注册
             $.ajax({
                 type: "POST",
