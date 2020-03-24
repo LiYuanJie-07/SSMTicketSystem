@@ -27,6 +27,10 @@
                 /loginController/login=anon
                 /loginController/checkUsername=anon
                 /loginController/register=anon
+                <!-- 修改密码相关请求 -->
+                /**/changepwd.jsp=anon
+                /userController/sendVfyCode=anon
+                /userController/changePassword=anon
                 <!-- 登出 -->
                 /logout=logout
                 <!-- 其余都需要认证 -->

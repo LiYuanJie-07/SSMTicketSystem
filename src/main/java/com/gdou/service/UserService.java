@@ -37,4 +37,12 @@ public interface UserService {
      * @return true：注册成功 false：注册失败
      */
     boolean addUser(User user);
+
+    /**
+     * 密码重置
+     *
+     * @param user 用户信息
+     * @return true：秘密啊修改成功 false：密码修改失败
+     */
+    boolean changePassword(User user);
 }

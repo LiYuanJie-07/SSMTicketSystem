@@ -1,4 +1,4 @@
-package com.gdou.Utilsa;
+package com.gdou.utils;
 
 
 import java.util.Random;
@@ -19,7 +19,6 @@ public class VerifyCodeUtil {
      * @return verifyCode 验证码    
      */
     public static String generateVerifyCode(int verifySize) {
-        System.out.println("进来了");
         return generateVerifyCode(verifySize, VERIFY_CODES);
     }
 

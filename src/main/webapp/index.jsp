@@ -40,7 +40,7 @@
 
     <div class="top-btns">
         <span>欢迎您 ${sessionScope.user.username}</span>
-        <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-lock'">修改密码</a>
+        <a href="/ssmTicketSystem/pages/user/changepwd.jsp" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-lock'">修改密码</a>
         <a href="/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'">退出系统</a>
     </div>
 </div>

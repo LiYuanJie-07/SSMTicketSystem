@@ -59,7 +59,7 @@ To change this template use File | Settings | File Templates.
             <!-- 注册按钮 -->
             <button class="btn btn-r pull-right" id="btn-goregister">注 册</button>
             <!-- 忘记密码 -->
-            <p class="pull-right text-muted goforget">忘记密码？请点 <a href="/index.jsp" class="navbar-link">这里</a>
+            <p class="pull-right text-muted goforget">忘记密码？请点 <a href="/ssmTicketSystem/pages/user/changepwd.jsp" class="navbar-link">这里</a>
             </p>
         </form>
     </div>

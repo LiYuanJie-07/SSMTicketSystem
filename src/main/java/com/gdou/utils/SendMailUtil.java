@@ -1,4 +1,4 @@
-package com.gdou.Utilsa;
+package com.gdou.utils;
 
 
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -85,10 +85,11 @@ public class SendMailUtil {
         StringBuilder builder = new StringBuilder();
 
         //写入内容
-        builder.append("\n" + emailContent);
+        builder.append("<br/>尊敬的用户：您好！<br/>" + emailContent +
+                "<br/>如果您没有做相关操作，可能是他人误填了您的邮箱地址，请忽略此邮件。<br/>注：本邮件为系统自动发出，请勿回复。");
 
         //在内容后加入邮件发送的时间
-        builder.append("\n时间：" + sendTime);
+        builder.append("<br/>时间：" + sendTime);
 
         //设置显示的发件时间
         message.setSentDate(new Date());

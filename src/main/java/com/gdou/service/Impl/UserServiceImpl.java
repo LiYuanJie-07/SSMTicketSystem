@@ -76,4 +76,20 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     * 密码重置
+     *
+     * @param user 用户信息
+     * @return true：秘密啊修改成功 false：密码修改失败
+     */
+    @Override
+    public boolean changePassword(User user) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andEmailEqualTo(user.getEmail());
+        int count = userMapper.updateByExampleSelective(user,example);
+        return count != 0;
+    }
+
+
 }
