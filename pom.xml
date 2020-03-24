@@ -51,7 +51,7 @@
         <!--分页插件版本-->
         <pagehelper.version>5.1.10</pagehelper.version>
         <!--shiro框架-->
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.2</shiro.version>
         <!-- 发送邮件jar包 -->
         <mail.version>1.4.7</mail.version>
 
