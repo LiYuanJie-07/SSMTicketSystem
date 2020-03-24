@@ -221,7 +221,7 @@
                 type = #{record.type,jdbcType=VARCHAR},
             </if>
             <if test="record.logintime != null">
-                type = #{record.logintime,jdbcType=VARCHAR},
+                logintime = #{record.logintime,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">

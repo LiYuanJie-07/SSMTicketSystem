@@ -21,9 +21,9 @@
     <tr>
         <th field="noticeid" align="center" sortable="true" hidden="true">公告编号</th>
         <th field="" checkbox="true" align="center"></th>
-        <th field="noticetitle" width="15" align="center" sortable="true">公告标题</th>
-        <th field="noticetext" width="75" align="center" sortable="true">公告内容</th>
-        <th field="noticetime" width="10" align="center" sortable="true">修改时间</th>
+        <th field="noticetitle" width="17" align="center" sortable="true">公告标题</th>
+        <th field="noticetext" width="76" align="center" sortable="true">公告内容</th>
+        <th field="noticetime" width="7" align="center" sortable="true">修改时间</th>
     </tr>
     </thead>
 </table>

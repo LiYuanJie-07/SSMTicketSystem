@@ -39,7 +39,7 @@ $(document).ready(function () {
                         title: notice.noticetitle,
                         iconCls: "icon-tip",
                         content: "<ul class='notice-list'><li><span class='date'>" +
-                            notice.noticetime + "</span><span style='display:inline-block;padding-right:35px;'>" + notice.noticetext + "</span></li></ul>",
+                            notice.noticetime + "</span><span style='display:inline-block;'>" + notice.noticetext + "</span></li></ul>",
                         selected: true
                     });
                 });
@@ -68,7 +68,7 @@ $(document).ready(function () {
                                     title: notice.noticetitle,
                                     iconCls: "icon-tip",
                                     content: "<ul class='notice-list'><li><span class='date'>" +
-                                        notice.noticetime + "</span><span style='display:inline-block;padding-right:35px;'>" + notice.noticetext + "</span></li></ul>",
+                                        notice.noticetime + "</span><span style='display:inline-block;'>" + notice.noticetext + "</span></li></ul>",
                                     selected: true
                                 });
                             });

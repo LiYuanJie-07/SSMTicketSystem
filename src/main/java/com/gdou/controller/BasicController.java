@@ -12,7 +12,6 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -62,18 +61,32 @@ public class BasicController {
         }
     }
 
+
     /**
-     * 获取当前日期，把当前日期按照一定格式返回
+     * 获取当前日期时间，把当前日期时间按照一定格式返回
      *
-     * @return 当前日期
-     * @throws ParseException
+     * @return 当前日期时间
      */
-    public String getDate() {
+    public String getDateTime() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateTime = null;
         dateTime = df.format(new Date());
         return dateTime;
     }
+
+
+    /**
+     * 获取当前日期，把当前日期按照一定格式返回
+     *
+     * @return 当前日期
+     */
+    public String getDate() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = null;
+        date = df.format(new Date());
+        return date;
+    }
+
 
     /**
      * MD5加密算法 实现对密码加密
