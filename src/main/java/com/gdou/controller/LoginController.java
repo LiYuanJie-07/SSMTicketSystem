@@ -67,7 +67,7 @@ public class LoginController extends BasicController {
         User user = userService.getUserByUserNameOrEamilOrPhone(username);
         //更新最近一次登录时间
         user.setLogintime(this.getDateTime());
-        userService.updateLoginTime(user);
+        userService.updateUser(user);
         //获取session
         HttpSession session = request.getSession();
         //把用户信息存入session
