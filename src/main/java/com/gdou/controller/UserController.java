@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * 用户信息操作Controller
  */
@@ -65,6 +68,55 @@ public class UserController extends BasicController {
         } else {
             return Msg.fail("密码修改失败，即将刷新本页面！");
         }
+    }
+
+
+    /**
+     * 修改用户信息
+     *
+     * @return Msg
+     */
+    @RequestMapping(value = "/changeUserInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg changeUserInfo(User newUserInfo, HttpServletRequest request) {
+        //获取session
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        //修改用户信息
+        user.setEmail(newUserInfo.getEmail());
+        user.setPhone(newUserInfo.getPhone());
+        user.setType(newUserInfo.getType());
+        //更新数据库
+        boolean reg = userService.updateUser(user);
+        if (reg) {
+            session.setAttribute("user",user);
+            return Msg.success("用户信息修改成功！");
+        } else {
+            return Msg.fail("用户信息修改失败！");
+        }
+    }
+
+
+    /**
+     * 校验登陆密码
+     *
+     * @return Msg
+     */
+    @RequestMapping(value = "/checkPassword", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg checkPassword(String password, HttpServletRequest request) {
+        //获取session
+        HttpSession session = request.getSession();
+        //获取session中的user对象
+        User user = (User) session.getAttribute("user");
+        String md5Password = this.md5(password);
+        //比对密码
+        if (md5Password.equals(user.getPassword())) {
+            return Msg.success("登陆密码正确！");
+        } else {
+            return Msg.fail("登陆密码错误！");
+        }
+
     }
 
 

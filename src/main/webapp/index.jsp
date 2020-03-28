@@ -48,11 +48,11 @@
 <!-- 左边菜单 -->
 <div region="west" title="导航菜单" id="naver">
     <div class="easyui-accordion" id="navmenu" data-options="fit:false">
-        <div title="指标体系">
+        <div title="个人中心">
             <ul class="navmenu">
-                <li class="active"><a href="#" data-url="/index.jsp">首页</a></li>
-                <li><a href="#" data-url="html/page01.html">组织机构管理</a></li>
-                <li><a href="#" data-url="html/page02.html">指标库列表</a></li>
+                <li class="active"><a href="javascript:void(0)" data-url="/index.jsp">首页</a></li>
+                <li><a href="javascript:void(0)" data-url="/ssmTicketSystem/pages/user/userinfo.jsp">用户信息</a></li>
+                <li><a href="javascript:void(0)" data-url="html/page02.html">指标库列表</a></li>
             </ul>
         </div>
         <div title="绩效考核"></div>

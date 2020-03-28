@@ -39,13 +39,15 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 根据用户id更新最近一次登陆时间
+     * 根据id更新用户信息
      *
      * @param user 用户信息
+     * @return true：用户信息更新成功 false：用户信息更新失败
      */
     @Override
-    public void updateLoginTime(User user) {
-        userMapper.updateByPrimaryKeySelective(user);
+    public boolean updateUser(User user) {
+        int count = userMapper.updateByPrimaryKeySelective(user);
+        return count != 0;
     }
 
     /**
@@ -87,7 +89,7 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andEmailEqualTo(user.getEmail());
-        int count = userMapper.updateByExampleSelective(user,example);
+        int count = userMapper.updateByExampleSelective(user, example);
         return count != 0;
     }
 

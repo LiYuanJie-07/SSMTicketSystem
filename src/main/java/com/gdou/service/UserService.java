@@ -16,11 +16,12 @@ public interface UserService {
     User getUserByUserNameOrEamilOrPhone(String username);
 
     /**
-     * 更新最近一次登录时间
+     * 根据id更新用户信息
      *
      * @param user 用户信息
+     * @return true：用户信息更新成功 false：用户信息更新失败
      */
-    void updateLoginTime(User user);
+    boolean updateUser(User user);
 
     /**
      * 校验注册用户名是否已经存在
