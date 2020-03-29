@@ -54,7 +54,7 @@ public class BasicController {
      */
     public boolean sessionTimeout(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("id") == null || ((String) session.getAttribute("id")).equals("")) {
+        if (session.getAttribute("user") == null) {
             return true;
         } else {
             return false;
