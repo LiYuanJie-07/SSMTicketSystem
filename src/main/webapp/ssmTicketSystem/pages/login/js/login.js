@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     //点击登录按钮发送请求
     $("#btn-login").click(function (e) {
         e.preventDefault();
@@ -13,11 +12,10 @@ $(document).ready(function () {
             data: $("#login-form").serialize(),
             dataType: "json",
             success: function (response) {
-                if (response.code == 200) {
-                    // 登录成功
-                    window.location.replace("/index.jsp");
-                } else if (response.code == 100) {
-                    // 登陆失败
+                if (response.code == 200) { //登陆成功
+                    //获取菜单
+                    getMenu();
+                } else if (response.code == 100) { // 登陆失败
                     //隐藏loading动画，显示登录span
                     $(".sk-wave").addClass('hide');
                     $("#login-span").removeClass('hide');
@@ -31,6 +29,31 @@ $(document).ready(function () {
         });
 
     });
+
+
+    // 获取菜单方法
+    function getMenu() {
+        $.ajax({
+            type: "GET",
+            url: "/loginController/getMenu",
+            dataType: "json",
+            success: function (response) {
+                if (response.code == 200) { //获取菜单成功
+                    // 跳转到主页
+                    window.location.replace("/index.jsp");
+                } else if (response.code == 100) { //获取菜单失败
+                    //隐藏loading动画，显示登录span
+                    $(".sk-wave").addClass('hide');
+                    $("#login-span").removeClass('hide');
+                    // 显示提示信息
+                    $("#tips-msg").empty().append(response.msg);
+                    $("#tips").fadeIn();
+                    // 定时消除提示框
+                    closeTips();
+                }
+            }
+        });
+    }
 
 
     //校验登录用户名为空提示

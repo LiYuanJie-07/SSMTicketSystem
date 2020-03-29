@@ -1,5 +1,7 @@
 package com.gdou.controller;
 
+import com.gdou.domain.Menu;
+import com.gdou.domain.MenuList;
 import com.gdou.domain.User;
 import com.gdou.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 登录Controller
@@ -116,11 +120,54 @@ public class LoginController extends BasicController {
 
     }
 
+
     /**
      * 退出登录由shiro提供的logout来进行
      * public String logout() {
      *     }
      */
+
+
+    /**
+     * 获取菜单
+     *
+     * @param request 请求
+     * @return Msg
+     */
+    @RequestMapping(value = "/getMenu", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getMenu(HttpServletRequest request) {
+        //获取session
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        //获取菜单
+        List<Menu> allMenus = userService.getMenu(user.getAdmin());
+        List<Menu> topMenus = new ArrayList<>();//一级菜单
+        List<MenuList> menuLists = new ArrayList<>();//封装菜单
+        if (allMenus == null || allMenus.size() == 0) {
+            return Msg.fail("获取菜单失败，请重新登录！");
+        } else {
+            for (Menu topMenu : allMenus) {//循环遍历所有菜单将一级菜单取出
+                if (topMenu.getParentid() == 0) {
+                    topMenus.add(topMenu);
+                }
+            }
+
+            for (Menu topMenu : topMenus) {//循环遍历一级菜单，将子菜单放入
+                List<Menu> child = new ArrayList<>();
+                for (Menu childMenu : allMenus) {//循环遍历所有菜单，将子菜单取出
+                    if (childMenu.getParentid() == topMenu.getMenuid()) {
+                        child.add(childMenu);//放入子菜单
+                    }
+                }
+                MenuList menuList = new MenuList(topMenu.getMenuname(), child);//封装成固定格式
+                menuLists.add(menuList);
+            }
+            session.setAttribute("menuLists", menuLists);
+            return Msg.success("获取菜单成功！");
+        }
+
+    }
 
 
 }

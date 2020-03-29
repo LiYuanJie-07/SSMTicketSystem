@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -40,7 +41,8 @@
 
     <div class="top-btns">
         <span>欢迎您 ${sessionScope.user.username}</span>
-        <a href="/ssmTicketSystem/pages/user/changepwd.jsp" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-lock'">修改密码</a>
+        <a href="/ssmTicketSystem/pages/user/changepwd.jsp" class="easyui-linkbutton"
+           data-options="plain:true,iconCls:'icon-lock'">修改密码</a>
         <a href="/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'">退出系统</a>
     </div>
 </div>
@@ -48,26 +50,15 @@
 <!-- 左边菜单 -->
 <div region="west" title="导航菜单" id="naver">
     <div class="easyui-accordion" id="navmenu" data-options="fit:false">
-        <div title="个人中心">
-            <ul class="navmenu">
-                <li class="active"><a href="javascript:void(0)" data-url="/index.jsp">首页</a></li>
-                <li><a href="javascript:void(0)" data-url="/ssmTicketSystem/pages/user/userinfo.jsp">用户信息</a></li>
-                <li><a href="javascript:void(0)" data-url="html/page02.html">指标库列表</a></li>
-            </ul>
-        </div>
-        <div title="绩效考核"></div>
-        <div title="报表管理"></div>
-        <div title="系统管理">
-            <ul class="navmenu">
-                <li><a href="javascript:void(0)" data-url="/ssmTicketSystem/pages/notice/notice.jsp">公告管理</a></li>
-                <li><a href="#" data-url="html/page02.html">指标库列表</a></li>
-            </ul>
-        </div>
-        <div title="组件示例">
-            <ul class="navmenu">
-                <li><a href="#" data-url="html/demo01.html">锁定行和列</a></li>
-            </ul>
-        </div>
+        <c:forEach var="firstMenu" items="${sessionScope.menuLists}">
+         <div title="${firstMenu.menuname}">
+             <ul class="navmenu">
+                <c:forEach var="secondMenu" items="${firstMenu.child}">
+                 <li><a href="javascript:void(0)" data-url="${secondMenu.menuurl}">${secondMenu.menuname}</a></li>
+                </c:forEach>
+             </ul>
+         </div>
+        </c:forEach>
     </div>
 </div>
 

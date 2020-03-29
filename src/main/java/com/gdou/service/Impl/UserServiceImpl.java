@@ -1,5 +1,6 @@
 package com.gdou.service.Impl;
 
+import com.gdou.domain.Menu;
 import com.gdou.domain.User;
 import com.gdou.domain.UserExample;
 import com.gdou.mapper.UserMapper;
@@ -91,6 +92,19 @@ public class UserServiceImpl implements UserService {
         criteria.andEmailEqualTo(user.getEmail());
         int count = userMapper.updateByExampleSelective(user, example);
         return count != 0;
+    }
+
+
+    /**
+     * 获取菜单
+     *
+     * @param admin 是否管理员
+     * @return
+     */
+    @Override
+    public List<Menu> getMenu(Integer admin) {
+        List<Menu> menus = userMapper.getMenu(admin);
+        return menus;
     }
 
 

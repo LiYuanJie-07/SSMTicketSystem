@@ -1,21 +1,35 @@
 package com.gdou.domain;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * 菜单实体类
  */
-public class Menu {
+public class Menu implements Serializable {
+    private Integer menuid;
+
+    private Integer admin;
+
     private String menuname;
 
     private String menuurl;
 
-    private List<Menu> child;
+    private Integer parentid;
 
-    public Menu(String menuname, String menuurl, List<Menu> child) {
-        this.menuname = menuname;
-        this.menuurl = menuurl;
-        this.child = child;
+    public Integer getMenuid() {
+        return menuid;
+    }
+
+    public void setMenuid(Integer menuid) {
+        this.menuid = menuid;
+    }
+
+    public Integer getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Integer admin) {
+        this.admin = admin;
     }
 
     public String getMenuname() {
@@ -34,11 +48,22 @@ public class Menu {
         this.menuurl = menuurl;
     }
 
-    public List<Menu> getChild() {
-        return child;
+    public Integer getParentid() {
+        return parentid;
     }
 
-    public void setChild(List<Menu> child) {
-        this.child = child;
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "menuid=" + menuid +
+                ", admin=" + admin +
+                ", menuname='" + menuname + '\'' +
+                ", menuurl='" + menuurl + '\'' +
+                ", parentid=" + parentid +
+                '}';
     }
 }

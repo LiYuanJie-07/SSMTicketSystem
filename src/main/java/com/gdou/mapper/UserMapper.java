@@ -1,5 +1,6 @@
 package com.gdou.mapper;
 
+import com.gdou.domain.Menu;
 import com.gdou.domain.User;
 import com.gdou.domain.UserExample;
 
@@ -11,6 +12,9 @@ import org.apache.ibatis.annotations.Param;
  * 用户Mapper接口
  */
 public interface UserMapper {
+    //获取菜单方法
+    List<Menu> getMenu(@Param("admin") Integer admin);
+
     //查询符合条件的所有用户总数
     long countByExample(UserExample example);
 

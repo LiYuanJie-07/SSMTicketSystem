@@ -290,4 +290,9 @@
       logintime = #{logintime,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
+
+    <!--获取菜单sql-->
+    <select id="getMenu" parameterType="java.lang.Integer" resultType="com.gdou.domain.Menu">
+        SELECT * FROM ts_menu WHERE admin = #{admin}
+    </select>
 </mapper>

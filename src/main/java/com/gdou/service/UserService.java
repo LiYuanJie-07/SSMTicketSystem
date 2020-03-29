@@ -1,6 +1,9 @@
 package com.gdou.service;
 
+import com.gdou.domain.Menu;
 import com.gdou.domain.User;
+
+import java.util.List;
 
 
 /**
@@ -46,4 +49,13 @@ public interface UserService {
      * @return true：秘密啊修改成功 false：密码修改失败
      */
     boolean changePassword(User user);
+
+
+    /**
+     * 获取菜单
+     *
+     * @param admin 是否管理员
+     * @return
+     */
+    List<Menu> getMenu(Integer admin);
 }
