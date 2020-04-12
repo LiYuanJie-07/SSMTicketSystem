@@ -51,13 +51,14 @@
 <div region="west" title="导航菜单" id="naver">
     <div class="easyui-accordion" id="navmenu" data-options="fit:false">
         <c:forEach var="firstMenu" items="${sessionScope.menuLists}">
-         <div title="${firstMenu.menuname}">
-             <ul class="navmenu">
-                <c:forEach var="secondMenu" items="${firstMenu.child}">
-                 <li><a href="javascript:void(0)" data-url="${secondMenu.menuurl}">${secondMenu.menuname}</a></li>
-                </c:forEach>
-             </ul>
-         </div>
+            <div title="${firstMenu.menuname}">
+                <ul class="navmenu">
+                    <c:forEach var="secondMenu" items="${firstMenu.child}">
+                        <li><a href="javascript:void(0)" data-url="${secondMenu.menuurl}">${secondMenu.menuname}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </c:forEach>
     </div>
 </div>
@@ -80,6 +81,7 @@
 
 <script type="text/javascript" src="/ssmTicketSystem/static/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/ssmTicketSystem/static/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/ssmTicketSystem/static/js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/ssmTicketSystem/static/js/index.js"></script>
 </body>
 

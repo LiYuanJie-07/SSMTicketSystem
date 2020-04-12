@@ -99,12 +99,57 @@ public class UserServiceImpl implements UserService {
      * 获取菜单
      *
      * @param admin 是否管理员
-     * @return
+     * @return 菜单列表
      */
     @Override
     public List<Menu> getMenu(Integer admin) {
         List<Menu> menus = userMapper.getMenu(admin);
         return menus;
+    }
+
+
+    /**
+     * 查询所有用户信息
+     *
+     * @return List<User>
+     */
+    @Override
+    public List<User> getAllUserInfo() {
+        UserExample example = new UserExample();
+        return userMapper.selectByExample(example);
+    }
+
+
+    /**
+     * 删除用户
+     *
+     * @param userid 用户id
+     * @return true：用户删除成功 false：用户删除失败
+     */
+    @Override
+    public boolean deleteUser(Integer userid) {
+        int count = userMapper.deleteByPrimaryKey(userid);
+        return count != 0;
+    }
+
+
+    /**
+     * 搜索用户
+     *
+     * @param value 搜索信息
+     * @return List<User>
+     */
+    @Override
+    public List<User> getUserInfo(String value) {
+        UserExample example = new UserExample();
+        example.or().andUsernameLike("%" + value + "%"); //根据用户名模糊查询
+        example.or().andEmailEqualTo(value); //根据邮箱查询
+        example.or().andIdcardnameLike("%" + value + "%"); //根据姓名模糊查询
+        example.or().andIdcardnumberEqualTo(value); //根据身份证号码查询
+        example.or().andPhoneEqualTo(value); //根据手机号码查询
+        List<User> users = null;
+        users = userMapper.selectByExample(example);
+        return users;
     }
 
 

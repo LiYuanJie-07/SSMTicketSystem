@@ -55,7 +55,33 @@ public interface UserService {
      * 获取菜单
      *
      * @param admin 是否管理员
-     * @return
+     * @return 菜单列表
      */
     List<Menu> getMenu(Integer admin);
+
+
+    /**
+     * 获取所有用户信息
+     *
+     * @return List<User>
+     */
+    List<User> getAllUserInfo();
+
+
+    /**
+     * 删除用户
+     *
+     * @param userid 用户id
+     * @return true：用户删除成功 false：用户删除失败
+     */
+    boolean deleteUser(Integer userid);
+
+
+    /**
+     * 搜索用户
+     *
+     * @param value 搜索信息
+     * @return List<User>
+     */
+    List<User> getUserInfo(String value);
 }
