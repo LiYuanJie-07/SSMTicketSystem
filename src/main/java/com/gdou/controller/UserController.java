@@ -128,6 +128,8 @@ public class UserController extends BasicController {
     /**
      * 获取所有用户信息
      *
+     * @param page 页数
+     * @param rows 每页记录条数
      * @return Msg
      */
     @RequestMapping(value = "/getAllUserInfo", method = RequestMethod.GET)
@@ -139,13 +141,13 @@ public class UserController extends BasicController {
         List<User> allUserInfo = userService.getAllUserInfo();
         //使用PageInfo包装查询结果
         PageInfo pageInfo = new PageInfo(allUserInfo);
-        //包装成EasyUI需要的格式：total：总条数，rows：数据列表
-        Map<String, Object> easyUIData = new HashMap<String, Object>();
-        easyUIData.put("total", pageInfo.getTotal());
-        easyUIData.put("rows", pageInfo.getList());
         if (pageInfo == null || pageInfo.getSize() == 0) {
             return Msg.fail("获取用户列表失败！");
         } else {
+            //包装成EasyUI需要的格式：total：总条数，rows：数据列表
+            Map<String, Object> easyUIData = new HashMap<String, Object>();
+            easyUIData.put("total", pageInfo.getTotal());
+            easyUIData.put("rows", pageInfo.getList());
             return Msg.success("获取用户列表成功！").add("allUserInfo", easyUIData);
         }
     }
