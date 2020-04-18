@@ -10,6 +10,7 @@
 <table class="easyui-datagrid" title="公告列表" id="dg-notice" data-options="
         fit:true,
         striped:true,
+        iconCls:'icon-notice',
         fitColumns:true,
         rownumbers:true,
         remoteSort:false,

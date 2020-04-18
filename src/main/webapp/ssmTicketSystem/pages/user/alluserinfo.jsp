@@ -14,12 +14,11 @@
 <!-- 用户管理 -->
 <table id="dg-alluserinfo" class="easyui-datagrid" title="用户管理" data-options="
                         fit:true,
-                        iconCls: 'icon-man',
+                        iconCls:'icon-alluserinfo',
                         singleSelect: true,
                         pagination: true,
                         rownumbers:true,
                         striped:true,
-
                         scrollbarSize:0,
                         toolbar:'#tb-alluserinfo'
         ">

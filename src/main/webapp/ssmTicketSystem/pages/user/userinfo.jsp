@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!-- 个人信息管理 -->
-<div class="easyui-panel" title="个人信息" data-options="fit:true" id="userinfo-panle">
+<div class="easyui-panel" title="个人信息" data-options="fit:true,iconCls:'icon-userinfo'" id="userinfo-panle">
     <div style="margin: 20px 350px;">
         <table cellpadding="5" style="font-size: 15px;">
             <tr>
