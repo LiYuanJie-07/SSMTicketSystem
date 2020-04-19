@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdou.mapper.TrainMapper">
+    <resultMap id="BaseResultMap" type="com.gdou.domain.Train">
+        <id column="trainid" jdbcType="INTEGER" property="trainid"/>
+        <result column="trainname" jdbcType="VARCHAR" property="trainname"/>
+        <result column="traintype" jdbcType="VARCHAR" property="traintype"/>
+        <result column="trainlocation" jdbcType="VARCHAR" property="trainlocation"/>
+        <result column="special_class_seat" jdbcType="INTEGER" property="specialClassSeat"/>
+        <result column="first_class_seat" jdbcType="INTEGER" property="firstClassSeat"/>
+        <result column="second_class_seat" jdbcType="INTEGER" property="secondClassSeat"/>
+        <result column="trainprice" jdbcType="DOUBLE" property="trainprice"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    trainid, trainname, traintype, trainlocation, special_class_seat, first_class_seat, 
+    second_class_seat, trainprice
+  </sql>
+    <select id="selectByExample" parameterType="com.gdou.domain.TrainExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from ts_train
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ts_train
+        where trainid = #{trainid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ts_train
+    where trainid = #{trainid,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.gdou.domain.TrainExample">
+        delete from ts_train
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.gdou.domain.Train">
+    insert into ts_train (trainid, trainname, traintype, 
+      trainlocation, special_class_seat, first_class_seat, 
+      second_class_seat, trainprice)
+    values (#{trainid,jdbcType=INTEGER}, #{trainname,jdbcType=VARCHAR}, #{traintype,jdbcType=VARCHAR}, 
+      #{trainlocation,jdbcType=VARCHAR}, #{specialClassSeat,jdbcType=INTEGER}, #{firstClassSeat,jdbcType=INTEGER}, 
+      #{secondClassSeat,jdbcType=INTEGER}, #{trainprice,jdbcType=DOUBLE})
+  </insert>
+    <insert id="insertSelective" parameterType="com.gdou.domain.Train">
+        insert into ts_train
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trainid != null">
+                trainid,
+            </if>
+            <if test="trainname != null">
+                trainname,
+            </if>
+            <if test="traintype != null">
+                traintype,
+            </if>
+            <if test="trainlocation != null">
+                trainlocation,
+            </if>
+            <if test="specialClassSeat != null">
+                special_class_seat,
+            </if>
+            <if test="firstClassSeat != null">
+                first_class_seat,
+            </if>
+            <if test="secondClassSeat != null">
+                second_class_seat,
+            </if>
+            <if test="trainprice != null">
+                trainprice,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trainid != null">
+                #{trainid,jdbcType=INTEGER},
+            </if>
+            <if test="trainname != null">
+                #{trainname,jdbcType=VARCHAR},
+            </if>
+            <if test="traintype != null">
+                #{traintype,jdbcType=VARCHAR},
+            </if>
+            <if test="trainlocation != null">
+                #{trainlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="specialClassSeat != null">
+                #{specialClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="firstClassSeat != null">
+                #{firstClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="secondClassSeat != null">
+                #{secondClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="trainprice != null">
+                #{trainprice,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.gdou.domain.TrainExample" resultType="java.lang.Long">
+        select count(*) from ts_train
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update ts_train
+        <set>
+            <if test="record.trainid != null">
+                trainid = #{record.trainid,jdbcType=INTEGER},
+            </if>
+            <if test="record.trainname != null">
+                trainname = #{record.trainname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.traintype != null">
+                traintype = #{record.traintype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.trainlocation != null">
+                trainlocation = #{record.trainlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.specialClassSeat != null">
+                special_class_seat = #{record.specialClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="record.firstClassSeat != null">
+                first_class_seat = #{record.firstClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="record.secondClassSeat != null">
+                second_class_seat = #{record.secondClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="record.trainprice != null">
+                trainprice = #{record.trainprice,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update ts_train
+        set trainid = #{record.trainid,jdbcType=INTEGER},
+        trainname = #{record.trainname,jdbcType=VARCHAR},
+        traintype = #{record.traintype,jdbcType=VARCHAR},
+        trainlocation = #{record.trainlocation,jdbcType=VARCHAR},
+        special_class_seat = #{record.specialClassSeat,jdbcType=INTEGER},
+        first_class_seat = #{record.firstClassSeat,jdbcType=INTEGER},
+        second_class_seat = #{record.secondClassSeat,jdbcType=INTEGER},
+        trainprice = #{record.trainprice,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gdou.domain.Train">
+        update ts_train
+        <set>
+            <if test="trainname != null">
+                trainname = #{trainname,jdbcType=VARCHAR},
+            </if>
+            <if test="traintype != null">
+                traintype = #{traintype,jdbcType=VARCHAR},
+            </if>
+            <if test="trainlocation != null">
+                trainlocation = #{trainlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="specialClassSeat != null">
+                special_class_seat = #{specialClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="firstClassSeat != null">
+                first_class_seat = #{firstClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="secondClassSeat != null">
+                second_class_seat = #{secondClassSeat,jdbcType=INTEGER},
+            </if>
+            <if test="trainprice != null">
+                trainprice = #{trainprice,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where trainid = #{trainid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gdou.domain.Train">
+    update ts_train
+    set trainname = #{trainname,jdbcType=VARCHAR},
+      traintype = #{traintype,jdbcType=VARCHAR},
+      trainlocation = #{trainlocation,jdbcType=VARCHAR},
+      special_class_seat = #{specialClassSeat,jdbcType=INTEGER},
+      first_class_seat = #{firstClassSeat,jdbcType=INTEGER},
+      second_class_seat = #{secondClassSeat,jdbcType=INTEGER},
+      trainprice = #{trainprice,jdbcType=DOUBLE}
+    where trainid = #{trainid,jdbcType=INTEGER}
+  </update>
+
+    <!--获取所有列车初始站名sql-->
+    <select id="selectAllTrainLocation" resultType="java.lang.String">
+        SELECT DISTINCT startstation FROM ts_station
+    </select>
+</mapper>
