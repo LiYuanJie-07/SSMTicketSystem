@@ -123,7 +123,3 @@
 <!-- /新增列车模态框 -->
 
 <script type="text/javascript" src="/ssmTicketSystem/pages/train/js/traininfo.js"></script>
-
-</body>
-
-</html>
