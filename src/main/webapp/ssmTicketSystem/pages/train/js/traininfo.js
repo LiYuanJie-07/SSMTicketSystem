@@ -57,6 +57,8 @@ $(document).ready(function () {
     // 新增按钮点击事件
     $("#btn-traininfo-add").click(function (e) {
         e.preventDefault();
+        //如果启动行编辑则取消
+        $('#dg-traininfo').datagrid('endEdit', index);
         // 取消行选中
         $('#dg-traininfo').datagrid('clearChecked');
         //清空新增输入框内容
