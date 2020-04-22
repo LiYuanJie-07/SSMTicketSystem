@@ -106,7 +106,6 @@ public class TrainController extends BasicController {
     @RequestMapping(value = "/changeTrainInfo", method = RequestMethod.POST)
     @ResponseBody
     public Msg changeTrainInfo(Train train) {
-        System.out.println(train);
         //修改列车信息
         boolean reg = trainService.updateTrain(train);
         if (reg) {

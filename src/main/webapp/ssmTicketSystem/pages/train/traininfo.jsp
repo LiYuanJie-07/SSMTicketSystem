@@ -69,7 +69,7 @@
        id="btn-traininfo-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
        id="btn-traininfo-reject">撤销修改</a>
-    <input class="easyui-searchbox" style="width:200px" id="btn-traininfo-search">
+    <input class="easyui-searchbox" data-options="prompt:'列车名/列车类型/初始站'" style="width:200px" id="btn-traininfo-search">
 </div>
 <!-- /列车管理 -->
 

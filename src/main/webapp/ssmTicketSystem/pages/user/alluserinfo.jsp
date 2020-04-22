@@ -67,7 +67,8 @@
        id="btn-alluserinfo-save">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
        id="btn-alluserinfo-reject">撤销修改</a>
-    <input class="easyui-searchbox" style="width:200px" id="btn-alluserinfo-search">
+    <input class="easyui-searchbox" data-options="prompt:'用户名/邮箱/姓名/身份证/手机号'" style="width:200px"
+           id="btn-alluserinfo-search">
 </div>
 <!-- /用户管理 -->
 

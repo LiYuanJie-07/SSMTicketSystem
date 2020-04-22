@@ -89,7 +89,6 @@ $(document).ready(function () {
                     "traintype": add_traintype,
                     "trainlocation": add_trainlocation,
                     "trainprice": add_trainprice
-
                 },
                 dataType: "json",
                 success: function (response) {
@@ -152,7 +151,7 @@ $(document).ready(function () {
 
 
     //保存按钮点击事件
-    var rowIndex;
+    var rowIndex; //点击保存时选中的行
     $('#btn-traininfo-save').click(function (e) {
         e.preventDefault();
         row = $('#dg-traininfo').datagrid('getSelected'); //获取当前选中的行
@@ -172,7 +171,7 @@ $(document).ready(function () {
                         "trainname": row.trainname,
                         "traintype": row.traintype,
                         "trainlocation": row.trainlocation,
-                        "trainprice": row.trainprice,
+                        "trainprice": row.trainprice
                     },
                     dataType: "json",
                     success: function (response) {
