@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -85,6 +86,33 @@ public class BasicController {
         String date = null;
         date = df.format(new Date());
         return date;
+    }
+
+
+    /**
+     * 计算时间加减
+     *
+     * @param nowTime 当前时间 格式：yyyy-MM-dd HH:mm:ss
+     * @param time    需要加的时间
+     * @return newTime 计算后的时间
+     */
+    public String calTime(String nowTime, int time) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date originalTime = null;
+        try {
+            originalTime = df.parse(nowTime);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (originalTime == null) {
+            return "";
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(originalTime);
+        calendar.add(Calendar.MINUTE, time); //时间加time分
+        Date newTime = calendar.getTime();
+        calendar = null;
+        return df.format(newTime);
     }
 
 
