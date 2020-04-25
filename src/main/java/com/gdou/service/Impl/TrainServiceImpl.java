@@ -29,6 +29,20 @@ public class TrainServiceImpl implements TrainService {
         return trainMapper.selectByExample(example);
     }
 
+
+    /**
+     * 根据列车id获取单个列车信息
+     *
+     * @param trainid 列车id
+     * @return train 单个列车信息
+     */
+    @Override
+    public Train getOneTrain(Integer trainid) {
+        Train train = trainMapper.selectByPrimaryKey(trainid);
+        return train;
+    }
+
+
     /**
      * 获取所有的列车初始站
      *

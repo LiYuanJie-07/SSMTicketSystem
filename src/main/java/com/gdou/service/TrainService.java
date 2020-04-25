@@ -18,6 +18,15 @@ public interface TrainService {
 
 
     /**
+     * 根据列车id获取单个列车信息
+     *
+     * @param trainid 列车id
+     * @return train 单个列车信息
+     */
+    Train getOneTrain(Integer trainid);
+
+
+    /**
      * 获取所有的列车初始站
      *
      * @return List<String> 所有的初始站名
