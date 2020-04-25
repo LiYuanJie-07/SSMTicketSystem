@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,4 +139,37 @@ public class StationController extends BasicController {
             return Msg.success("共查找到 " + stationInfo.size() + " 条记录").add("searchStationInfo", easyUIData);
         }
     }
+
+
+    /**
+     * 刷新所有列车日期时间
+     *
+     * @return Msg
+     */
+    @RequestMapping(value = "/updateStationTime", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg updateStationTime() throws ParseException {
+        List<Station> allStationInfo = stationService.getAllStationInfo();
+        //刷新日期到最新一天
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date nowDate = new Date(); //当前日期
+        for (Station station : allStationInfo) {
+            Date stationDate = df.parse(station.getStarttime()); //数据库站台日期
+            if (stationDate.before(nowDate)) {//判断数据库站台日期是否小于当前日期
+                //计算两个日期间相差的天数，并转换为分钟数
+                double timediff = nowDate.getTime() - stationDate.getTime();
+                int mindiff = (int) (Math.ceil(timediff / (1000 * 3600 * 24)) * 60 * 24);
+                //刷新出发时间
+                station.setStarttime(this.calTime(station.getStarttime(), mindiff));
+                //刷新到达时间
+                station.setArrivetime(this.calTime(station.getStarttime(), station.getUsetime()));
+                //更新数据库
+                boolean reg = stationService.updateStation(station);
+            }
+        }
+        return Msg.success("站台日期刷新成功！");
+    }
+
+
 }
+

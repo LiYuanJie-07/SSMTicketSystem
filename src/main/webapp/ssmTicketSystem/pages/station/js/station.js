@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    //刷新站台日期
+    $.ajax({
+        type: "GET",
+        url: "/stationController/updateStationTime",
+        dataType: "json",
+        success: function (response) {
+            if (response.code == 200) {
+                loadStationInfo(1, 10);
+            }
+        }
+    });
+
     //分页
     var pager = $('#dg-stationinfo').datagrid('getPager');
     pager.pagination({
@@ -50,8 +62,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    loadStationInfo(1, 10);
 
 
     // 新增按钮点击事件

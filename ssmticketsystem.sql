@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80013
 File Encoding         : 65001
 
-Date: 2020-04-19 02:02:06
+Date: 2020-04-26 02:39:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,8 @@ INSERT INTO `ts_menu` VALUES ('12', '1', '个人信息', '/ssmTicketSystem/pages
 INSERT INTO `ts_menu` VALUES ('13', '1', '用户信息', '/ssmTicketSystem/pages/user/alluserinfo.jsp', '1');
 INSERT INTO `ts_menu` VALUES ('21', '1', '公告管理', '/ssmTicketSystem/pages/notice/notice.jsp', '2');
 INSERT INTO `ts_menu` VALUES ('22', '1', '列车管理', '/ssmTicketSystem/pages/train/traininfo.jsp', '2');
+INSERT INTO `ts_menu` VALUES ('23', '1', '始终站管理', '/ssmTicketSystem/pages/station/station.jsp', '2');
+INSERT INTO `ts_menu` VALUES ('24', '1', '座位管理', '/ssmTicketSystem/pages/train/seatinfo.jsp', '2');
 INSERT INTO `ts_menu` VALUES ('31', '0', '首页', '/index.jsp', '3');
 INSERT INTO `ts_menu` VALUES ('32', '0', '用户信息', '/ssmTicketSystem/pages/user/userinfo.jsp', '3');
 INSERT INTO `ts_menu` VALUES ('33', '0', '用户', 'html/page02.html', '3');
@@ -93,9 +95,9 @@ CREATE TABLE `ts_order` (
   KEY `order_userid` (`userid`),
   KEY `order_ticketid` (`ticketid`),
   KEY `order_seatid` (`seatid`),
-  CONSTRAINT `order_seatid` FOREIGN KEY (`seatid`) REFERENCES `ts_seat` (`seatid`),
-  CONSTRAINT `order_ticketid` FOREIGN KEY (`ticketid`) REFERENCES `ts_ticket` (`ticketid`),
-  CONSTRAINT `order_userid` FOREIGN KEY (`userid`) REFERENCES `ts_user` (`userid`)
+  CONSTRAINT `order_seatid` FOREIGN KEY (`seatid`) REFERENCES `ts_seat` (`seatid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `order_ticketid` FOREIGN KEY (`ticketid`) REFERENCES `ts_ticket` (`ticketid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `order_userid` FOREIGN KEY (`userid`) REFERENCES `ts_user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -116,7 +118,7 @@ CREATE TABLE `ts_seat` (
   `seatlocation` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`seatid`),
   KEY `seat_trainid` (`trainid`),
-  CONSTRAINT `seat_trainid` FOREIGN KEY (`trainid`) REFERENCES `ts_train` (`trainid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `seat_trainid` FOREIGN KEY (`trainid`) REFERENCES `ts_train` (`trainid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=502 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -633,34 +635,36 @@ CREATE TABLE `ts_station` (
   `endstation` varchar(25) DEFAULT NULL,
   `starttime` datetime DEFAULT NULL,
   `arrivetime` datetime DEFAULT NULL,
-  `usetime` time DEFAULT NULL,
+  `usetime` int(10) DEFAULT NULL,
   `distance` int(10) DEFAULT NULL,
-  PRIMARY KEY (`stationid`)
+  PRIMARY KEY (`stationid`),
+  KEY `starttime` (`starttime`),
+  KEY `arrivetime` (`arrivetime`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ts_station
 -- ----------------------------
-INSERT INTO `ts_station` VALUES ('1', '广州南', '湛江西', '2020-04-18 15:00:00', '2020-04-18 18:00:00', '03:00:00', '420');
-INSERT INTO `ts_station` VALUES ('2', '湛江西', '广州南', '2020-04-18 15:00:00', '2020-04-18 18:00:00', '03:00:00', '420');
-INSERT INTO `ts_station` VALUES ('3', '广州南', '深圳北', '2020-04-18 15:00:00', '2020-04-18 15:40:00', '00:40:00', '200');
-INSERT INTO `ts_station` VALUES ('4', '深圳北', '广州南', '2020-04-18 15:00:00', '2020-04-18 15:40:00', '00:40:00', '200');
-INSERT INTO `ts_station` VALUES ('5', '北京南', '南京南', '2020-04-18 10:30:00', '2020-04-18 15:00:00', '04:30:00', '1200');
-INSERT INTO `ts_station` VALUES ('6', '南京南', '北京南', '2020-04-18 11:00:00', '2020-04-18 15:30:00', '04:30:00', '1200');
-INSERT INTO `ts_station` VALUES ('7', '广州南', '长沙南', '2020-04-18 15:30:00', '2020-04-18 18:30:00', '03:00:00', '400');
-INSERT INTO `ts_station` VALUES ('8', '长沙南', '广州南', '2020-04-18 15:40:00', '2020-04-18 18:40:00', '03:00:00', '400');
-INSERT INTO `ts_station` VALUES ('9', '广州南', '北京西', '2020-04-18 01:00:00', '2020-04-18 11:00:00', '10:00:00', '3000');
-INSERT INTO `ts_station` VALUES ('10', '北京西', '广州南', '2020-04-19 09:00:00', '2020-04-19 19:00:00', '10:00:00', '3000');
-INSERT INTO `ts_station` VALUES ('11', '北京南', '上海虹桥', '2020-04-18 13:00:00', '2020-04-18 19:00:00', '06:00:00', '1800');
-INSERT INTO `ts_station` VALUES ('12', '上海虹桥', '北京南', '2020-04-18 15:00:00', '2020-04-18 21:00:00', '06:00:00', '1800');
-INSERT INTO `ts_station` VALUES ('13', '湛江西', '深圳北', '2020-04-18 12:00:00', '2020-04-18 16:00:00', '04:00:00', '500');
-INSERT INTO `ts_station` VALUES ('14', '深圳北', '湛江西', '2020-04-18 16:00:00', '2020-04-18 20:00:00', '04:00:00', '500');
-INSERT INTO `ts_station` VALUES ('15', '成都东', '广州南', '2020-04-18 08:30:00', '2020-04-18 16:30:00', '08:00:00', '2500');
-INSERT INTO `ts_station` VALUES ('16', '广州南', '成都东', '2020-04-18 09:30:00', '2020-04-18 17:30:00', '08:00:00', '2500');
-INSERT INTO `ts_station` VALUES ('17', '广州南', '重庆西', '2020-04-18 10:00:00', '2020-04-18 17:00:00', '07:00:00', '2100');
-INSERT INTO `ts_station` VALUES ('18', '重庆西', '广州南', '2020-04-18 14:00:00', '2020-04-18 21:00:00', '07:00:00', '2100');
-INSERT INTO `ts_station` VALUES ('19', '广州南', '上海虹桥', '2020-04-18 07:00:00', '2020-04-18 19:00:00', '12:00:00', '3600');
-INSERT INTO `ts_station` VALUES ('20', '上海虹桥', '广州南', '2020-04-18 07:00:00', '2020-04-18 19:00:00', '12:00:00', '3600');
+INSERT INTO `ts_station` VALUES ('1', '广州南', '湛江西', '2020-04-26 15:00:00', '2020-04-26 18:00:00', '180', '420');
+INSERT INTO `ts_station` VALUES ('2', '湛江西', '广州南', '2020-04-26 15:00:00', '2020-04-26 18:00:00', '180', '420');
+INSERT INTO `ts_station` VALUES ('3', '广州南', '深圳北', '2020-04-26 15:00:00', '2020-04-26 15:40:00', '40', '200');
+INSERT INTO `ts_station` VALUES ('4', '深圳北', '广州南', '2020-04-26 15:00:00', '2020-04-26 15:40:00', '40', '200');
+INSERT INTO `ts_station` VALUES ('5', '北京南', '南京南', '2020-04-26 10:30:00', '2020-04-26 15:00:00', '270', '1200');
+INSERT INTO `ts_station` VALUES ('6', '南京南', '北京南', '2020-04-26 11:00:00', '2020-04-26 15:30:00', '270', '1200');
+INSERT INTO `ts_station` VALUES ('7', '广州南', '长沙南', '2020-04-26 15:30:00', '2020-04-26 18:30:00', '180', '400');
+INSERT INTO `ts_station` VALUES ('8', '长沙南', '广州南', '2020-04-29 15:40:00', '2020-04-18 18:40:00', '180', '400');
+INSERT INTO `ts_station` VALUES ('9', '广州南', '北京西', '2020-05-18 01:00:00', '2020-04-18 11:00:00', '600', '3000');
+INSERT INTO `ts_station` VALUES ('10', '北京西', '广州南', '2020-04-26 09:00:00', '2020-04-26 19:00:00', '600', '3000');
+INSERT INTO `ts_station` VALUES ('11', '北京南', '上海虹桥', '2020-04-26 13:00:00', '2020-04-26 19:00:00', '360', '1800');
+INSERT INTO `ts_station` VALUES ('12', '上海虹桥', '北京南', '2020-04-26 15:00:00', '2020-04-26 21:00:00', '360', '1800');
+INSERT INTO `ts_station` VALUES ('13', '湛江西', '深圳北', '2020-04-26 12:00:00', '2020-04-26 16:00:00', '240', '500');
+INSERT INTO `ts_station` VALUES ('14', '深圳北', '湛江西', '2020-04-26 16:00:00', '2020-04-26 20:00:00', '240', '500');
+INSERT INTO `ts_station` VALUES ('15', '成都东', '广州南', '2020-04-26 08:30:00', '2020-04-26 16:30:00', '480', '2500');
+INSERT INTO `ts_station` VALUES ('16', '广州南', '成都东', '2020-04-26 09:30:00', '2020-04-26 17:30:00', '480', '2500');
+INSERT INTO `ts_station` VALUES ('17', '广州南', '重庆西', '2020-04-26 10:00:00', '2020-04-26 17:00:00', '420', '2100');
+INSERT INTO `ts_station` VALUES ('18', '重庆西', '广州南', '2020-04-26 14:00:00', '2020-04-26 21:00:00', '420', '2100');
+INSERT INTO `ts_station` VALUES ('19', '广州南', '上海虹桥', '2020-04-26 07:00:00', '2020-04-26 19:00:00', '720', '3600');
+INSERT INTO `ts_station` VALUES ('20', '上海虹桥', '广州南', '2020-04-26 07:00:00', '2020-04-26 19:00:00', '720', '3600');
 
 -- ----------------------------
 -- Table structure for ts_ticket
@@ -674,7 +678,7 @@ CREATE TABLE `ts_ticket` (
   `ticket_endstation` varchar(25) DEFAULT NULL,
   `ticket_starttime` datetime DEFAULT NULL,
   `ticket_arrivetime` datetime DEFAULT NULL,
-  `ticket_usetime` time DEFAULT NULL,
+  `ticket_usetime` int(10) DEFAULT NULL,
   `ticketprice` double(10,1) DEFAULT NULL,
   `ticket_trainname` varchar(25) DEFAULT NULL,
   `ticket_traintype` varchar(25) DEFAULT NULL,
@@ -684,14 +688,14 @@ CREATE TABLE `ts_ticket` (
   PRIMARY KEY (`ticketid`),
   KEY `ticket_trainid` (`trainid`),
   KEY `ticket_stationid` (`stationid`),
-  CONSTRAINT `ticket_stationid` FOREIGN KEY (`stationid`) REFERENCES `ts_station` (`stationid`),
-  CONSTRAINT `ticket_trainid` FOREIGN KEY (`trainid`) REFERENCES `ts_train` (`trainid`)
+  CONSTRAINT `ticket_stationid` FOREIGN KEY (`stationid`) REFERENCES `ts_station` (`stationid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ticket_trainid` FOREIGN KEY (`trainid`) REFERENCES `ts_train` (`trainid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ts_ticket
 -- ----------------------------
-INSERT INTO `ts_ticket` VALUES ('1', '1', '1', '广州南', '湛江西', '2020-04-18 15:00:00', '2020-04-18 18:00:00', '03:00:00', '298.0', 'G1', '高铁', '5', '10', '10');
+INSERT INTO `ts_ticket` VALUES ('1', '1', '1', '广州南', '湛江西', '2020-04-26 15:00:00', '2020-04-26 18:00:00', '180', '298.0', 'G1', '高铁', '5', '10', '10');
 
 -- ----------------------------
 -- Table structure for ts_train
@@ -754,7 +758,7 @@ CREATE TABLE `ts_user` (
 -- ----------------------------
 -- Records of ts_user
 -- ----------------------------
-INSERT INTO `ts_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '626816858@qq.com', '1', '441203201905321234', '张三', '18620645324', '成人', '2020-04-19 02:00:43');
+INSERT INTO `ts_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '626816858@qq.com', '1', '441203201905321234', '张三', '18620645324', '成人', '2020-04-26 02:38:58');
 INSERT INTO `ts_user` VALUES ('2', 'user1', 'e10adc3949ba59abbe56e057f20f883e', 'lisi@126.com', '0', '441203196502114231', '李四', '18630200697', '成人', '2020-04-18 20:15:36');
 INSERT INTO `ts_user` VALUES ('3', 'user3', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '钟彬虔', '18630200697', '儿童', '2020-03-29 23:52:21');
 INSERT INTO `ts_user` VALUES ('4', 'user4', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '钟华泽', '18630200697', '成人', '2020-03-29 23:52:21');
