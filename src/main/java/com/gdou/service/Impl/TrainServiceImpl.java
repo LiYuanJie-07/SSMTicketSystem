@@ -111,4 +111,37 @@ public class TrainServiceImpl implements TrainService {
         trains = trainMapper.selectByExample(example);
         return trains;
     }
+
+
+    /**
+     * 根据 始发站 以及 列车类型 获取 车次（列车名）
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @return List<String>
+     */
+    @Override
+    public List<String> getTrainNameByLocationAndTrainType(String trainlocation, String traintype) {
+        return trainMapper.selectTrainNameByLocationAndTrainType(trainlocation, traintype);
+    }
+
+    /**
+     * 根据 始发站 以及 列车类型 以及 列车民 获取 列车信息
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @param trainname     列车名
+     * @return List<Train>
+     */
+    @Override
+    public List<Train> getTrainByLocationAndNameAndType(String trainlocation, String traintype, String trainname) {
+        TrainExample example = new TrainExample();
+        TrainExample.Criteria criteria = example.createCriteria();
+        criteria.andTrainlocationEqualTo(trainlocation);
+        criteria.andTraintypeEqualTo(traintype);
+        criteria.andTrainnameEqualTo(trainname);
+        List<Train> trains = null;
+        trains = trainMapper.selectByExample(example);
+        return trains;
+    }
 }

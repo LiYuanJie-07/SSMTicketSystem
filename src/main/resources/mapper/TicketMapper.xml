@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdou.mapper.TicketMapper">
+  <resultMap id="BaseResultMap" type="com.gdou.domain.Ticket">
+    <id column="ticketid" jdbcType="INTEGER" property="ticketid" />
+    <result column="stationid" jdbcType="INTEGER" property="stationid" />
+    <result column="trainid" jdbcType="INTEGER" property="trainid" />
+    <result column="ticket_startstation" jdbcType="VARCHAR" property="ticketStartstation" />
+    <result column="ticket_endstation" jdbcType="VARCHAR" property="ticketEndstation" />
+    <result column="ticket_starttime" jdbcType="VARCHAR" property="ticketStarttime" />
+    <result column="ticket_arrivetime" jdbcType="VARCHAR" property="ticketArrivetime" />
+    <result column="ticket_usetime" jdbcType="INTEGER" property="ticketUsetime" />
+    <result column="ticketprice" jdbcType="DOUBLE" property="ticketprice" />
+    <result column="ticket_trainname" jdbcType="VARCHAR" property="ticketTrainname" />
+    <result column="ticket_traintype" jdbcType="VARCHAR" property="ticketTraintype" />
+    <result column="special_seat_number" jdbcType="INTEGER" property="specialSeatNumber" />
+    <result column="first_seat_number" jdbcType="INTEGER" property="firstSeatNumber" />
+    <result column="second_seat_number" jdbcType="INTEGER" property="secondSeatNumber" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ticketid, stationid, trainid, ticket_startstation, ticket_endstation, ticket_starttime, 
+    ticket_arrivetime, ticket_usetime, ticketprice, ticket_trainname, ticket_traintype, 
+    special_seat_number, first_seat_number, second_seat_number
+  </sql>
+  <select id="selectByExample" parameterType="com.gdou.domain.TicketExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ts_ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ts_ticket
+    where ticketid = #{ticketid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ts_ticket
+    where ticketid = #{ticketid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gdou.domain.TicketExample">
+    delete from ts_ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gdou.domain.Ticket">
+    insert into ts_ticket (ticketid, stationid, trainid, 
+      ticket_startstation, ticket_endstation, ticket_starttime, 
+      ticket_arrivetime, ticket_usetime, ticketprice, 
+      ticket_trainname, ticket_traintype, special_seat_number, 
+      first_seat_number, second_seat_number)
+    values (#{ticketid,jdbcType=INTEGER}, #{stationid,jdbcType=INTEGER}, #{trainid,jdbcType=INTEGER}, 
+      #{ticketStartstation,jdbcType=VARCHAR}, #{ticketEndstation,jdbcType=VARCHAR}, #{ticketStarttime,jdbcType=VARCHAR},
+      #{ticketArrivetime,jdbcType=VARCHAR}, #{ticketUsetime,jdbcType=INTEGER}, #{ticketprice,jdbcType=DOUBLE},
+      #{ticketTrainname,jdbcType=VARCHAR}, #{ticketTraintype,jdbcType=VARCHAR}, #{specialSeatNumber,jdbcType=INTEGER}, 
+      #{firstSeatNumber,jdbcType=INTEGER}, #{secondSeatNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdou.domain.Ticket">
+    insert into ts_ticket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ticketid != null">
+        ticketid,
+      </if>
+      <if test="stationid != null">
+        stationid,
+      </if>
+      <if test="trainid != null">
+        trainid,
+      </if>
+      <if test="ticketStartstation != null">
+        ticket_startstation,
+      </if>
+      <if test="ticketEndstation != null">
+        ticket_endstation,
+      </if>
+      <if test="ticketStarttime != null">
+        ticket_starttime,
+      </if>
+      <if test="ticketArrivetime != null">
+        ticket_arrivetime,
+      </if>
+      <if test="ticketUsetime != null">
+        ticket_usetime,
+      </if>
+      <if test="ticketprice != null">
+        ticketprice,
+      </if>
+      <if test="ticketTrainname != null">
+        ticket_trainname,
+      </if>
+      <if test="ticketTraintype != null">
+        ticket_traintype,
+      </if>
+      <if test="specialSeatNumber != null">
+        special_seat_number,
+      </if>
+      <if test="firstSeatNumber != null">
+        first_seat_number,
+      </if>
+      <if test="secondSeatNumber != null">
+        second_seat_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ticketid != null">
+        #{ticketid,jdbcType=INTEGER},
+      </if>
+      <if test="stationid != null">
+        #{stationid,jdbcType=INTEGER},
+      </if>
+      <if test="trainid != null">
+        #{trainid,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStartstation != null">
+        #{ticketStartstation,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketEndstation != null">
+        #{ticketEndstation,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketStarttime != null">
+        #{ticketStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketArrivetime != null">
+        #{ticketArrivetime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketUsetime != null">
+        #{ticketUsetime,jdbcType=INTEGER},
+      </if>
+      <if test="ticketprice != null">
+        #{ticketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ticketTrainname != null">
+        #{ticketTrainname,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketTraintype != null">
+        #{ticketTraintype,jdbcType=VARCHAR},
+      </if>
+      <if test="specialSeatNumber != null">
+        #{specialSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="firstSeatNumber != null">
+        #{firstSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="secondSeatNumber != null">
+        #{secondSeatNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gdou.domain.TicketExample" resultType="java.lang.Long">
+    select count(*) from ts_ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ts_ticket
+    <set>
+      <if test="record.ticketid != null">
+        ticketid = #{record.ticketid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationid != null">
+        stationid = #{record.stationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainid != null">
+        trainid = #{record.trainid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketStartstation != null">
+        ticket_startstation = #{record.ticketStartstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketEndstation != null">
+        ticket_endstation = #{record.ticketEndstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketStarttime != null">
+        ticket_starttime = #{record.ticketStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketArrivetime != null">
+        ticket_arrivetime = #{record.ticketArrivetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketUsetime != null">
+        ticket_usetime = #{record.ticketUsetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketprice != null">
+        ticketprice = #{record.ticketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ticketTrainname != null">
+        ticket_trainname = #{record.ticketTrainname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketTraintype != null">
+        ticket_traintype = #{record.ticketTraintype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialSeatNumber != null">
+        special_seat_number = #{record.specialSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstSeatNumber != null">
+        first_seat_number = #{record.firstSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.secondSeatNumber != null">
+        second_seat_number = #{record.secondSeatNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ts_ticket
+    set ticketid = #{record.ticketid,jdbcType=INTEGER},
+      stationid = #{record.stationid,jdbcType=INTEGER},
+      trainid = #{record.trainid,jdbcType=INTEGER},
+      ticket_startstation = #{record.ticketStartstation,jdbcType=VARCHAR},
+      ticket_endstation = #{record.ticketEndstation,jdbcType=VARCHAR},
+      ticket_starttime = #{record.ticketStarttime,jdbcType=VARCHAR},
+      ticket_arrivetime = #{record.ticketArrivetime,jdbcType=VARCHAR},
+      ticket_usetime = #{record.ticketUsetime,jdbcType=INTEGER},
+      ticketprice = #{record.ticketprice,jdbcType=DOUBLE},
+      ticket_trainname = #{record.ticketTrainname,jdbcType=VARCHAR},
+      ticket_traintype = #{record.ticketTraintype,jdbcType=VARCHAR},
+      special_seat_number = #{record.specialSeatNumber,jdbcType=INTEGER},
+      first_seat_number = #{record.firstSeatNumber,jdbcType=INTEGER},
+      second_seat_number = #{record.secondSeatNumber,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdou.domain.Ticket">
+    update ts_ticket
+    <set>
+      <if test="stationid != null">
+        stationid = #{stationid,jdbcType=INTEGER},
+      </if>
+      <if test="trainid != null">
+        trainid = #{trainid,jdbcType=INTEGER},
+      </if>
+      <if test="ticketStartstation != null">
+        ticket_startstation = #{ticketStartstation,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketEndstation != null">
+        ticket_endstation = #{ticketEndstation,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketStarttime != null">
+        ticket_starttime = #{ticketStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketArrivetime != null">
+        ticket_arrivetime = #{ticketArrivetime,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketUsetime != null">
+        ticket_usetime = #{ticketUsetime,jdbcType=INTEGER},
+      </if>
+      <if test="ticketprice != null">
+        ticketprice = #{ticketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ticketTrainname != null">
+        ticket_trainname = #{ticketTrainname,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketTraintype != null">
+        ticket_traintype = #{ticketTraintype,jdbcType=VARCHAR},
+      </if>
+      <if test="specialSeatNumber != null">
+        special_seat_number = #{specialSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="firstSeatNumber != null">
+        first_seat_number = #{firstSeatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="secondSeatNumber != null">
+        second_seat_number = #{secondSeatNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ticketid = #{ticketid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdou.domain.Ticket">
+    update ts_ticket
+    set stationid = #{stationid,jdbcType=INTEGER},
+      trainid = #{trainid,jdbcType=INTEGER},
+      ticket_startstation = #{ticketStartstation,jdbcType=VARCHAR},
+      ticket_endstation = #{ticketEndstation,jdbcType=VARCHAR},
+      ticket_starttime = #{ticketStarttime,jdbcType=VARCHAR},
+      ticket_arrivetime = #{ticketArrivetime,jdbcType=VARCHAR},
+      ticket_usetime = #{ticketUsetime,jdbcType=INTEGER},
+      ticketprice = #{ticketprice,jdbcType=DOUBLE},
+      ticket_trainname = #{ticketTrainname,jdbcType=VARCHAR},
+      ticket_traintype = #{ticketTraintype,jdbcType=VARCHAR},
+      special_seat_number = #{specialSeatNumber,jdbcType=INTEGER},
+      first_seat_number = #{firstSeatNumber,jdbcType=INTEGER},
+      second_seat_number = #{secondSeatNumber,jdbcType=INTEGER}
+    where ticketid = #{ticketid,jdbcType=INTEGER}
+  </update>
+
+
+  <!--查询所有车票信息-->
+  <select id="selectAllTicketInfo" resultType="com.gdou.domain.Ticket">
+    SELECT   ticket.ticketid,ticket.trainid,ticket.stationid,
+			 train.trainname AS ticket_trainname, train.traintype AS ticket_traintype,
+			 train.special_class_seat AS special_seat_number, train.first_class_seat AS first_seat_number,
+			 train.second_class_seat AS second_seat_number,
+			 station.startstation AS ticket_startstation, station.endstation AS ticket_endstation,
+			 station.starttime AS ticket_starttime, station.arrivetime AS ticket_arrivetime,
+			 station.usetime AS ticket_usetime, train.trainprice * station.distance AS ticketprice
+    FROM     ts_train AS train , ts_station AS station ,ts_ticket AS ticket
+    WHERE    ticket.trainid = train.trainid AND ticket.stationid = station.stationid
+    LIMIT    #{offset,jdbcType=INTEGER} , #{limit,jdbcType=INTEGER};
+  </select>
+</mapper>

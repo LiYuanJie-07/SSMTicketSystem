@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ts_station
     where stationid = #{stationid,jdbcType=INTEGER}
@@ -240,4 +240,20 @@
       distance = #{distance,jdbcType=INTEGER}
     where stationid = #{stationid,jdbcType=INTEGER}
   </update>
+
+  <!--获取所有始发站-->
+  <select id="selectAllStartStation" resultType="java.lang.String">
+    SELECT DISTINCT startstation FROM ts_station;
+  </select>
+
+  <!--根据所选始发站获取终点站-->
+  <select id="selectEndStationByStartStation" resultType="java.lang.String">
+    SELECT DISTINCT endstation FROM ts_station WHERE startstation = #{startstation,jdbcType=VARCHAR};
+  </select>
+
+  <!--根据所选始发站和终点站获取发车时间-->
+  <select id="selectStartTimeByStartAndEnd" resultType="java.lang.String">
+    SELECT starttime FROM ts_station
+    WHERE startstation = #{startstation,jdbcType=VARCHAR} AND endstation = #{endstation,jdbcType=VARCHAR};
+  </select>
 </mapper>

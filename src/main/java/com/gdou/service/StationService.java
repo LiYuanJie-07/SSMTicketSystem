@@ -55,4 +55,41 @@ public interface StationService {
      */
     List<Station> getStationInfo(String query_startstation, String query_endstation, String query_starttime, String query_arrivetime);
 
+
+    /**
+     * 获取所有始发站
+     *
+     * @return List<Map>
+     */
+    List<String> getAllStartStation();
+
+
+    /**
+     * 根据所选始发站获取终点站
+     *
+     * @param startstation 始发站
+     * @return List<String>
+     */
+    List<String> getEndStation(String startstation);
+
+
+    /**
+     * 根据所选始发站和终点站获取发车时间
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @return List<String>
+     */
+    List<String> getStartTime(String startstation, String endstation);
+
+
+    /**
+     * 据所选始发站、终点站、发车时间 获取 唯一始终站台信息
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @param starttime    发车时间
+     * @return List<Station>
+     */
+    List<Station> getStationBySelect(String startstation, String endstation, String starttime);
 }

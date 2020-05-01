@@ -68,4 +68,25 @@ public interface TrainService {
      * @return List<Train>
      */
     List<Train> getTrainInfo(String value);
+
+
+    /**
+     * 根据 始发站 以及 列车类型 获取 车次（列车名）
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @return List<String>
+     */
+    List<String> getTrainNameByLocationAndTrainType(String trainlocation, String traintype);
+
+
+    /**
+     * 根据 始发站 以及 列车类型 以及 列车民 获取 列车信息
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @param trainname     列车名
+     * @return List<Train>
+     */
+    List<Train> getTrainByLocationAndNameAndType(String trainlocation, String traintype, String trainname);
 }

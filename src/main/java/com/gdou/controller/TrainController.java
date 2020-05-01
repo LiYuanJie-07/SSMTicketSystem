@@ -156,4 +156,48 @@ public class TrainController extends BasicController {
         }
     }
 
+
+    /**
+     * 根据 始发站 以及 列车类型 获取 车次（列车名）
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @return List<Map < String, String>>
+     */
+    @RequestMapping(value = "/getTrainNameByLocationAndTrainType", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, String>> getTrainNameByLocationAndTrainType(String trainlocation, String traintype) {
+        List<String> trainNames = trainService.getTrainNameByLocationAndTrainType(trainlocation, traintype);
+        //包装成EasyUI需要的格式：id：选项id，text：选项文本
+        List<Map<String, String>> easyUIComboboxList = new ArrayList<>();
+        for (int i = 0; i < trainNames.size(); i++) {
+            Map<String, String> easyUIData = new HashMap<String, String>();
+            easyUIData.put("id", trainNames.get(i));
+            easyUIData.put("text", trainNames.get(i));
+            easyUIComboboxList.add(easyUIData);
+        }
+        return easyUIComboboxList;
+    }
+
+
+    /**
+     * 根据 始发站 以及 列车类型 以及 列车民 获取 列车信息
+     *
+     * @param trainlocation 始发站
+     * @param traintype     列车类型
+     * @param trainname     列车名
+     * @return Msg
+     */
+    @RequestMapping(value = "/getTrainByLocationAndNameAndType", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getTrainByLocationAndNameAndType(String trainlocation, String traintype, String trainname) {
+        List<Train> trains = trainService.getTrainByLocationAndNameAndType(trainlocation, traintype, trainname);
+        if (trains == null || trains.size() == 0) {
+            return Msg.fail("获取列车信息失败！");
+        } else {
+            Train train = trains.get(0);
+            return Msg.success("获取列车信息成功！").add("train", train);
+        }
+    }
+
 }

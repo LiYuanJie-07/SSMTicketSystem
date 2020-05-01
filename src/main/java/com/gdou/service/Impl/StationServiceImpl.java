@@ -98,4 +98,61 @@ public class StationServiceImpl implements StationService {
         stations = stationMapper.selectByExample(example);
         return stations;
     }
+
+
+    /**
+     * 获取所有始发站
+     *
+     * @return List<Map>
+     */
+    @Override
+    public List<String> getAllStartStation() {
+        return stationMapper.selectAllStartStation();
+    }
+
+
+    /**
+     * 根据所选始发站获取终点站
+     *
+     * @param startstation 始发站
+     * @return List<String>
+     */
+    @Override
+    public List<String> getEndStation(String startstation) {
+        return stationMapper.selectEndStationByStartStation(startstation);
+    }
+
+
+    /**
+     * 根据所选始发站和终点站获取发车时间
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @return List<String>
+     */
+    @Override
+    public List<String> getStartTime(String startstation, String endstation) {
+        return stationMapper.selectStartTimeByStartAndEnd(startstation, endstation);
+    }
+
+
+    /**
+     * 据所选始发站、终点站、发车时间 获取 唯一始终站台信息
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @param starttime    发车时间
+     * @return List<Station>
+     */
+    @Override
+    public List<Station> getStationBySelect(String startstation, String endstation, String starttime) {
+        StationExample example = new StationExample();
+        StationExample.Criteria criteria = example.createCriteria();
+        criteria.andStartstationEqualTo(startstation);
+        criteria.andEndstationEqualTo(endstation);
+        criteria.andStarttimeEqualTo(starttime);
+        List<Station> stations = null;
+        stations = stationMapper.selectByExample(example);
+        return stations;
+    }
 }

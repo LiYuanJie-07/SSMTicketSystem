@@ -263,4 +263,11 @@
     <select id="selectAllTrainLocation" resultType="java.lang.String">
         SELECT DISTINCT startstation FROM ts_station
     </select>
+
+    <!--根据 始发站 以及 列车类型 获取 车次（列车名）sql-->
+    <select id="selectTrainNameByLocationAndTrainType" resultType="java.lang.String">
+        SELECT DISTINCT trainname
+        FROM ts_train
+        WHERE trainlocation = #{trainlocation,jdbcType=VARCHAR} AND traintype = #{traintype,jdbcType=VARCHAR};
+    </select>
 </mapper>

@@ -2,7 +2,9 @@ package com.gdou.mapper;
 
 import com.gdou.domain.Train;
 import com.gdou.domain.TrainExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TrainMapper {
@@ -30,4 +32,7 @@ public interface TrainMapper {
 
     //获取所有的列车初始站
     List<String> selectAllTrainLocation();
+
+    //根据 始发站 以及 列车类型 获取 车次（列车名）
+    List<String> selectTrainNameByLocationAndTrainType(@Param("trainlocation") String trainlocation, @Param("traintype") String traintype);
 }
