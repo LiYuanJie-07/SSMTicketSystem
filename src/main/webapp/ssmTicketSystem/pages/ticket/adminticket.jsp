@@ -30,8 +30,8 @@
         <th data-options="field:'ticketStartstation',align:'center'" width="8%">始发站</th>
         <th data-options="field:'ticketEndstation',align:'center'" width="8%">终点站</th>
         <th data-options="field:'ticketStarttime',align:'center'" width="11%">发车时间</th>
-        <th data-options="field:'ticketUsetime',align:'center',formatter:function(data){return parseInt(data/60)+'小时'+data%60+'分钟'},
-                    editor:{type:'textbox',options:{prompt:'请输入历时分钟数'}}" width="8%">历时
+        <th data-options="field:'ticketUsetime',align:'center',formatter:function(data){return parseInt(data/60)+'小时'+data%60+'分钟'}"
+            width="8%">历时
         </th>
         <th data-options="field:'ticketArrivetime',align:'center'" width="11%">预计到达时间</th>
         <th data-options="field:'ticketTrainname',align:'center'" width="8%">车次</th>
