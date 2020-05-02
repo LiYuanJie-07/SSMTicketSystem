@@ -64,9 +64,6 @@ $(document).ready(function () {
         });
     }
 
-    loadTicketInfo(1, 10);
-
-
     var distance //保存站台距离
     //选择始发站触发方法
     $("#adminTicket-add-ticketstartstation").combobox({
