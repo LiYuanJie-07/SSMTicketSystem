@@ -85,7 +85,7 @@ public class TicketController extends BasicController {
 
 
     /**
-     * 搜索车票台信息
+     * 搜索车票信息
      *
      * @param query_startstation 查询条件 始发站
      * @param query_endstation   查询条件 终点站
