@@ -112,5 +112,9 @@
 .icon-ticket{
 	background:url('icons/ticket.png') no-repeat center center;
 }
-
-
+.icon-buyticket{
+	 background:url('icons/buyticket.png') no-repeat center center;
+}
+.icon-buy{
+	background:url('icons/buy.png') no-repeat center center;
+}

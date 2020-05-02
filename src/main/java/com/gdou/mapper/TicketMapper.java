@@ -2,7 +2,9 @@ package com.gdou.mapper;
 
 import com.gdou.domain.Ticket;
 import com.gdou.domain.TicketExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TicketMapper {
@@ -28,7 +30,10 @@ public interface TicketMapper {
 
     int updateByPrimaryKey(Ticket record);
 
-
     //查询所有车票信息
     List<Ticket> selectAllTicketInfo(@Param("offset") Integer offset, @Param("limit") Integer limit);
+
+    //根据 列车id 以及 座位类型 获取 座位号
+    List<String> selectSeatLocationByTrainIdAndSeatType(@Param("trainid") Integer trainid, @Param("seattype") String seattype);
+
 }

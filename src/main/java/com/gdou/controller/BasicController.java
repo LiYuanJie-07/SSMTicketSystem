@@ -1,6 +1,7 @@
 package com.gdou.controller;
 
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
@@ -166,6 +167,19 @@ public class BasicController {
         oldStr = oldStr.replace("\t", "&nbsp;&nbsp;&nbsp;");
         oldStr = oldStr.replace("\"", "&quot;");
         return oldStr;
+    }
+
+
+    /**
+     * 生成流水号
+     *
+     * @return String
+     */
+    public String createSerial() {
+        SimpleDateFormat sdft = new SimpleDateFormat("yyMMddhhmmss");
+        Date nowdate = new Date();
+        String str = sdft.format(nowdate);
+        return "TS" + str + RandomStringUtils.randomNumeric(4);
     }
 
 }

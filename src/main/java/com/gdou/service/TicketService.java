@@ -33,6 +33,15 @@ public interface TicketService {
 
 
     /**
+     * 修改车票信息
+     *
+     * @param ticket 新始车票信息
+     * @return true：修改车票信息成功  false：修改车票信息失败
+     */
+    boolean updateTicket(Ticket ticket);
+
+
+    /**
      * 删除车票
      *
      * @param ticketid 车票id
@@ -51,4 +60,31 @@ public interface TicketService {
      * @return List<Ticket>
      */
     List<Ticket> getTicketInfo(String query_startstation, String query_endstation, String query_starttime, String query_arrivetime);
+
+
+    /**
+     * 用户获取所有车票信息
+     *
+     * @return List<Ticket>
+     */
+    List<Ticket> getAllTicketInfoUser();
+
+
+    /**
+     * 根据 列车id 以及 座位类型 获取 座位号
+     *
+     * @param trainid  列车id
+     * @param seattype 座位类型
+     * @return List<String>
+     */
+    List<String> getSeatLocationByTrainIdAndSeatType(Integer trainid, String seattype);
+
+
+    /**
+     * 根据 车票id 获取 单个车票信息
+     *
+     * @param ticketid 车票id
+     * @return Ticket 车票信息
+     */
+    Ticket getOneTicketInfo(Integer ticketid);
 }

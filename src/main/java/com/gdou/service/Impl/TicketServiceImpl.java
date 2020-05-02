@@ -57,6 +57,18 @@ public class TicketServiceImpl implements TicketService {
     }
 
 
+    /**
+     * 修改车票信息
+     *
+     * @param ticket 新始车票信息
+     * @return true：修改车票信息成功  false：修改车票信息失败
+     */
+    @Override
+    public boolean updateTicket(Ticket ticket) {
+        int count = ticketMapper.updateByPrimaryKeySelective(ticket);
+        return count != 0;
+    }
+
 
     /**
      * 删除车票
@@ -98,5 +110,42 @@ public class TicketServiceImpl implements TicketService {
         List<Ticket> tickets = null;
         tickets = ticketMapper.selectByExample(example);
         return tickets;
+    }
+
+
+    /**
+     * 用户获取所有车票信息
+     *
+     * @return List<Ticket>
+     */
+    @Override
+    public List<Ticket> getAllTicketInfoUser() {
+        TicketExample example = new TicketExample();
+        return ticketMapper.selectByExample(example);
+    }
+
+
+    /**
+     * 根据 列车id 以及 座位类型 获取 座位号
+     *
+     * @param trainid  列车id
+     * @param seattype 座位类型
+     * @return List<String>
+     */
+    @Override
+    public List<String> getSeatLocationByTrainIdAndSeatType(Integer trainid, String seattype) {
+        return ticketMapper.selectSeatLocationByTrainIdAndSeatType(trainid, seattype);
+    }
+
+
+    /**
+     * 根据 车票id 获取 单个车票信息
+     *
+     * @param ticketid 车票id
+     * @return Ticket 车票信息
+     */
+    @Override
+    public Ticket getOneTicketInfo(Integer ticketid) {
+        return ticketMapper.selectByPrimaryKey(ticketid);
     }
 }

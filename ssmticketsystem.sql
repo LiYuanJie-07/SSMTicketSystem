@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80013
 File Encoding         : 65001
 
-Date: 2020-05-01 20:05:43
+Date: 2020-05-02 21:51:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `ts_menu` (
 INSERT INTO `ts_menu` VALUES ('1', '1', '用户管理', null, '0');
 INSERT INTO `ts_menu` VALUES ('2', '1', '系统管理', null, '0');
 INSERT INTO `ts_menu` VALUES ('3', '0', '个人中心', null, '0');
-INSERT INTO `ts_menu` VALUES ('4', '0', '票务管理', null, '0');
+INSERT INTO `ts_menu` VALUES ('4', '0', '票务中心', null, '0');
 INSERT INTO `ts_menu` VALUES ('5', '1', '票务管理', null, '0');
 INSERT INTO `ts_menu` VALUES ('11', '1', '首页', '/index.jsp', '1');
 INSERT INTO `ts_menu` VALUES ('12', '1', '个人信息', '/ssmTicketSystem/pages/user/userinfo.jsp', '1');
@@ -45,8 +45,7 @@ INSERT INTO `ts_menu` VALUES ('23', '1', '始终站管理', '/ssmTicketSystem/pa
 INSERT INTO `ts_menu` VALUES ('24', '1', '座位管理', '/ssmTicketSystem/pages/train/seatinfo.jsp', '2');
 INSERT INTO `ts_menu` VALUES ('31', '0', '首页', '/index.jsp', '3');
 INSERT INTO `ts_menu` VALUES ('32', '0', '用户信息', '/ssmTicketSystem/pages/user/userinfo.jsp', '3');
-INSERT INTO `ts_menu` VALUES ('33', '0', '用户', 'html/page02.html', '3');
-INSERT INTO `ts_menu` VALUES ('41', '0', '公告管理', '/ssmTicketSystem/pages/notice/notice.jsp', '4');
+INSERT INTO `ts_menu` VALUES ('41', '0', '售票大厅', '/ssmTicketSystem/pages/ticket/userticket.jsp', '4');
 INSERT INTO `ts_menu` VALUES ('42', '0', '指标库列表', 'html/page02.html', '4');
 INSERT INTO `ts_menu` VALUES ('51', '1', '车票管理', '/ssmTicketSystem/pages/ticket/adminticket.jsp', '5');
 
@@ -75,7 +74,7 @@ INSERT INTO `ts_notice` VALUES ('4', '中国铁路广州局集团有限公司关
 -- ----------------------------
 DROP TABLE IF EXISTS `ts_order`;
 CREATE TABLE `ts_order` (
-  `orderid` int(10) NOT NULL AUTO_INCREMENT,
+  `orderid` varchar(25) NOT NULL,
   `userid` int(10) DEFAULT NULL,
   `order_username` varchar(25) DEFAULT NULL,
   `order_idcardname` varchar(25) DEFAULT NULL,
@@ -100,12 +99,13 @@ CREATE TABLE `ts_order` (
   CONSTRAINT `order_seatid` FOREIGN KEY (`seatid`) REFERENCES `ts_seat` (`seatid`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `order_ticketid` FOREIGN KEY (`ticketid`) REFERENCES `ts_ticket` (`ticketid`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `order_userid` FOREIGN KEY (`userid`) REFERENCES `ts_user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ts_order
 -- ----------------------------
-INSERT INTO `ts_order` VALUES ('1', '2', 'user1', '李四', '441203196502114231', '1', 'G1', '广州南', '湛江西', '2020-04-18 15:00:00', '2020-04-18 18:00:00', '298.0', '2020-04-19 14:47:38', '未支付', '1', '1', '商务座', 'S01A');
+INSERT INTO `ts_order` VALUES ('TS2004190247384924', '2', 'user1', '李四', '441203196502114231', '1', 'G1', '广州南', '湛江西', '2020-04-18 15:00:00', '2020-04-18 18:00:00', '298.0', '2020-04-19 14:47:38', '已支付', '1', '1', '商务座', 'S01A');
+INSERT INTO `ts_order` VALUES ('TS2005020942321993', '3', 'user3', '钟彬虔', '441203196502114231', '2', 'D5', '湛江西', '广州南', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '395.2', '2020-05-02 21:42:32', '已支付', '351', '1', '商务座', 'S15A');
 
 -- ----------------------------
 -- Table structure for ts_seat
@@ -476,7 +476,7 @@ INSERT INTO `ts_seat` VALUES ('347', '14', '二等座', '3', '0', 'E14G');
 INSERT INTO `ts_seat` VALUES ('348', '14', '二等座', '3', '0', 'E14H');
 INSERT INTO `ts_seat` VALUES ('349', '14', '二等座', '3', '0', 'E14I');
 INSERT INTO `ts_seat` VALUES ('350', '14', '二等座', '3', '0', 'E14J');
-INSERT INTO `ts_seat` VALUES ('351', '15', '商务座', '1', '0', 'S15A');
+INSERT INTO `ts_seat` VALUES ('351', '15', '商务座', '1', '1', 'S15A');
 INSERT INTO `ts_seat` VALUES ('352', '15', '商务座', '1', '0', 'S15B');
 INSERT INTO `ts_seat` VALUES ('353', '15', '商务座', '1', '0', 'S15C');
 INSERT INTO `ts_seat` VALUES ('354', '15', '商务座', '1', '0', 'S15D');
@@ -647,26 +647,26 @@ CREATE TABLE `ts_station` (
 -- ----------------------------
 -- Records of ts_station
 -- ----------------------------
-INSERT INTO `ts_station` VALUES ('1', '广州南', '湛江西', '2020-05-02 15:00:00', '2020-05-02 18:00:00', '180', '420');
-INSERT INTO `ts_station` VALUES ('2', '湛江西', '广州南', '2020-05-02 15:00:00', '2020-05-02 18:00:00', '180', '420');
-INSERT INTO `ts_station` VALUES ('3', '广州南', '深圳北', '2020-05-02 15:00:00', '2020-05-02 15:40:00', '40', '200');
-INSERT INTO `ts_station` VALUES ('4', '深圳北', '广州南', '2020-05-02 15:00:00', '2020-05-02 15:40:00', '40', '200');
-INSERT INTO `ts_station` VALUES ('5', '北京南', '南京南', '2020-05-02 10:30:00', '2020-05-02 15:00:00', '270', '1200');
-INSERT INTO `ts_station` VALUES ('6', '南京南', '北京南', '2020-05-02 11:00:00', '2020-05-02 15:30:00', '270', '1200');
-INSERT INTO `ts_station` VALUES ('7', '广州南', '长沙南', '2020-05-02 15:30:00', '2020-05-02 18:30:00', '180', '400');
-INSERT INTO `ts_station` VALUES ('8', '长沙南', '广州南', '2020-05-02 15:40:00', '2020-05-02 18:40:00', '180', '400');
+INSERT INTO `ts_station` VALUES ('1', '广州南', '湛江西', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '180', '420');
+INSERT INTO `ts_station` VALUES ('2', '湛江西', '广州南', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '180', '420');
+INSERT INTO `ts_station` VALUES ('3', '广州南', '深圳北', '2020-05-03 15:00:00', '2020-05-03 15:40:00', '40', '200');
+INSERT INTO `ts_station` VALUES ('4', '深圳北', '广州南', '2020-05-03 15:00:00', '2020-05-03 15:40:00', '40', '200');
+INSERT INTO `ts_station` VALUES ('5', '北京南', '南京南', '2020-05-03 10:30:00', '2020-05-03 15:00:00', '270', '1200');
+INSERT INTO `ts_station` VALUES ('6', '南京南', '北京南', '2020-05-03 11:00:00', '2020-05-03 15:30:00', '270', '1200');
+INSERT INTO `ts_station` VALUES ('7', '广州南', '长沙南', '2020-05-03 15:30:00', '2020-05-03 18:30:00', '180', '400');
+INSERT INTO `ts_station` VALUES ('8', '长沙南', '广州南', '2020-05-03 15:40:00', '2020-05-03 18:40:00', '180', '400');
 INSERT INTO `ts_station` VALUES ('9', '广州南', '北京西', '2020-05-18 01:00:00', '2020-04-18 11:00:00', '600', '3000');
-INSERT INTO `ts_station` VALUES ('10', '北京西', '广州南', '2020-05-02 09:00:00', '2020-05-02 19:00:00', '600', '3000');
-INSERT INTO `ts_station` VALUES ('11', '北京南', '上海虹桥', '2020-05-02 13:00:00', '2020-05-02 19:00:00', '360', '1800');
-INSERT INTO `ts_station` VALUES ('12', '上海虹桥', '北京南', '2020-05-02 15:00:00', '2020-05-02 21:00:00', '360', '1800');
-INSERT INTO `ts_station` VALUES ('13', '湛江西', '深圳北', '2020-05-02 12:00:00', '2020-05-02 16:00:00', '240', '500');
-INSERT INTO `ts_station` VALUES ('14', '深圳北', '湛江西', '2020-05-02 16:00:00', '2020-05-02 20:00:00', '240', '500');
-INSERT INTO `ts_station` VALUES ('15', '成都东', '广州南', '2020-05-02 08:30:00', '2020-05-02 16:30:00', '480', '2500');
-INSERT INTO `ts_station` VALUES ('16', '广州南', '成都东', '2020-05-02 09:30:00', '2020-05-02 17:30:00', '480', '2500');
-INSERT INTO `ts_station` VALUES ('17', '广州南', '重庆西', '2020-05-02 10:00:00', '2020-05-02 17:00:00', '420', '2100');
-INSERT INTO `ts_station` VALUES ('18', '重庆西', '广州南', '2020-05-02 14:00:00', '2020-05-02 21:00:00', '420', '2100');
-INSERT INTO `ts_station` VALUES ('19', '广州南', '上海虹桥', '2020-05-02 07:00:00', '2020-05-02 19:00:00', '720', '3600');
-INSERT INTO `ts_station` VALUES ('20', '上海虹桥', '广州南', '2020-05-02 07:00:00', '2020-05-02 19:00:00', '720', '3600');
+INSERT INTO `ts_station` VALUES ('10', '北京西', '广州南', '2020-05-03 09:00:00', '2020-05-03 19:00:00', '600', '3000');
+INSERT INTO `ts_station` VALUES ('11', '北京南', '上海虹桥', '2020-05-03 13:00:00', '2020-05-03 19:00:00', '360', '1800');
+INSERT INTO `ts_station` VALUES ('12', '上海虹桥', '北京南', '2020-05-03 15:00:00', '2020-05-03 21:00:00', '360', '1800');
+INSERT INTO `ts_station` VALUES ('13', '湛江西', '深圳北', '2020-05-03 12:00:00', '2020-05-03 16:00:00', '240', '500');
+INSERT INTO `ts_station` VALUES ('14', '深圳北', '湛江西', '2020-05-03 16:00:00', '2020-05-03 20:00:00', '240', '500');
+INSERT INTO `ts_station` VALUES ('15', '成都东', '广州南', '2020-05-03 08:30:00', '2020-05-03 16:30:00', '480', '2500');
+INSERT INTO `ts_station` VALUES ('16', '广州南', '成都东', '2020-05-03 09:30:00', '2020-05-03 17:30:00', '480', '2500');
+INSERT INTO `ts_station` VALUES ('17', '广州南', '重庆西', '2020-05-03 10:00:00', '2020-05-03 17:00:00', '420', '2100');
+INSERT INTO `ts_station` VALUES ('18', '重庆西', '广州南', '2020-05-03 14:00:00', '2020-05-03 21:00:00', '420', '2100');
+INSERT INTO `ts_station` VALUES ('19', '广州南', '上海虹桥', '2020-05-03 07:00:00', '2020-05-03 19:00:00', '720', '3600');
+INSERT INTO `ts_station` VALUES ('20', '上海虹桥', '广州南', '2020-05-03 07:00:00', '2020-05-03 19:00:00', '720', '3600');
 
 -- ----------------------------
 -- Table structure for ts_ticket
@@ -697,9 +697,9 @@ CREATE TABLE `ts_ticket` (
 -- ----------------------------
 -- Records of ts_ticket
 -- ----------------------------
-INSERT INTO `ts_ticket` VALUES ('1', '1', '1', '广州南', '湛江西', '2020-04-26 15:00:00', '2020-04-26 18:00:00', '180', '294.0', 'G1', '高铁', '4', '10', '10');
-INSERT INTO `ts_ticket` VALUES ('2', '2', '15', '湛江西', '广州南', '2020-04-27 15:00:00', '2020-04-27 18:00:00', '180', '294.0', 'D5', '动车', '5', '10', '10');
-INSERT INTO `ts_ticket` VALUES ('3', '2', '19', '湛江西', '广州南', '2020-05-02 15:00:00', '2020-05-02 18:00:00', '180', '168.0', 'D9', '动车', '5', '10', '10');
+INSERT INTO `ts_ticket` VALUES ('1', '1', '1', '广州南', '湛江西', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '180', '294.0', 'G1', '高铁', '4', '10', '10');
+INSERT INTO `ts_ticket` VALUES ('2', '2', '15', '湛江西', '广州南', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '180', '294.0', 'D5', '动车', '4', '10', '10');
+INSERT INTO `ts_ticket` VALUES ('3', '2', '19', '湛江西', '广州南', '2020-05-03 15:00:00', '2020-05-03 18:00:00', '180', '168.0', 'D9', '动车', '5', '10', '10');
 
 -- ----------------------------
 -- Table structure for ts_train
@@ -734,7 +734,7 @@ INSERT INTO `ts_train` VALUES ('11', 'D1', '动车', '广州南', '5', '10', '10
 INSERT INTO `ts_train` VALUES ('12', 'D2', '动车', '北京南', '5', '10', '10', '0.4');
 INSERT INTO `ts_train` VALUES ('13', 'D3', '动车', '广州南', '5', '10', '10', '0.4');
 INSERT INTO `ts_train` VALUES ('14', 'D4', '动车', '广州南', '5', '10', '10', '0.4');
-INSERT INTO `ts_train` VALUES ('15', 'D5', '动车', '湛江西', '5', '10', '10', '0.4');
+INSERT INTO `ts_train` VALUES ('15', 'D5', '动车', '湛江西', '4', '10', '10', '0.4');
 INSERT INTO `ts_train` VALUES ('16', 'D6', '动车', '广州南', '5', '10', '10', '0.4');
 INSERT INTO `ts_train` VALUES ('17', 'D7', '动车', '广州南', '5', '10', '10', '0.4');
 INSERT INTO `ts_train` VALUES ('18', 'D8', '动车', '上海虹桥', '5', '10', '10', '0.4');
@@ -762,9 +762,9 @@ CREATE TABLE `ts_user` (
 -- ----------------------------
 -- Records of ts_user
 -- ----------------------------
-INSERT INTO `ts_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '626816858@qq.com', '1', '441203201905321234', '张三', '18620645324', '成人', '2020-05-01 20:02:53');
-INSERT INTO `ts_user` VALUES ('2', 'user1', 'e10adc3949ba59abbe56e057f20f883e', 'lisi@126.com', '0', '441203196502114231', '李四', '18630200697', '成人', '2020-04-18 20:15:36');
-INSERT INTO `ts_user` VALUES ('3', 'user3', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '钟彬虔', '18630200697', '儿童', '2020-03-29 23:52:21');
+INSERT INTO `ts_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '626816858@qq.com', '1', '441203201905321234', '张三', '18620645324', '成人', '2020-05-02 11:18:11');
+INSERT INTO `ts_user` VALUES ('2', 'user1', 'e10adc3949ba59abbe56e057f20f883e', 'lisi@126.com', '0', '441203196502114231', '李四', '18630200697', '成人', '2020-05-02 21:00:28');
+INSERT INTO `ts_user` VALUES ('3', 'user3', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '钟彬虔', '18630200697', '儿童', '2020-05-02 21:41:59');
 INSERT INTO `ts_user` VALUES ('4', 'user4', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '钟华泽', '18630200697', '成人', '2020-03-29 23:52:21');
 INSERT INTO `ts_user` VALUES ('5', 'user5', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '蔺孔文', '18630200697', '军人', '2020-03-29 23:52:21');
 INSERT INTO `ts_user` VALUES ('6', 'user6', 'e10adc3949ba59abbe56e057f20f883e', 'testEmail@126.com', '0', '441203196502114231', '张伟', '18630200697', '成人', '2020-03-29 23:52:21');

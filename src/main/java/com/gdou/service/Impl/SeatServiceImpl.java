@@ -83,4 +83,51 @@ public class SeatServiceImpl implements SeatService {
         seats = seatMapper.searchSeatInfo(value);
         return seats;
     }
+
+
+    /**
+     * 根据 列车id 以及 座位类型 以及 座位号 获取 座位信息
+     *
+     * @param trainid      列车id
+     * @param seattype     座位类型
+     * @param seatlocation 座位号
+     * @return List<Seat>
+     */
+    @Override
+    public List<Seat> getSeatByTrainIdAndSeatTypeAndSeatLocation(Integer trainid, String seattype, String seatlocation) {
+        SeatExample example = new SeatExample();
+        SeatExample.Criteria criteria = example.createCriteria();
+        criteria.andTrainidEqualTo(trainid);
+        criteria.andSeattypeEqualTo(seattype);
+        criteria.andSeatlocationEqualTo(seatlocation);
+        List<Seat> seats = null;
+        seats = seatMapper.selectByExample(example);
+        return seats;
+    }
+
+
+    /**
+     * 根据 座位id 获取 单个座位信息
+     *
+     * @param seatid 座位id
+     * @return Seat 单个座位信息
+     */
+    @Override
+    public Seat getOneSeat(Integer seatid) {
+        Seat seat = seatMapper.selectByPrimaryKey(seatid);
+        return seat;
+    }
+
+
+    /**
+     * 修改座位信息
+     *
+     * @param seat 新座位信息
+     * @return true：修改座位信息成功  false：修改座位信息失败
+     */
+    @Override
+    public boolean updateSeat(Seat seat) {
+        int count = seatMapper.updateByPrimaryKeySelective(seat);
+        return count != 0;
+    }
 }

@@ -366,4 +366,11 @@
     WHERE    ticket.trainid = train.trainid AND ticket.stationid = station.stationid
     LIMIT    #{offset,jdbcType=INTEGER} , #{limit,jdbcType=INTEGER};
   </select>
+
+  <!--根据 列车id 以及 座位类型 获取 座位号-->
+  <select id="selectSeatLocationByTrainIdAndSeatType" resultType="java.lang.String">
+    SELECT seatlocation
+    FROM ts_seat
+    WHERE trainid = #{trainid,jdbcType=INTEGER} AND seattype = #{seattype,jdbcType=VARCHAR} AND status = 0;
+  </select>
 </mapper>
