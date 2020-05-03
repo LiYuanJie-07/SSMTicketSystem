@@ -36,4 +36,6 @@ public interface TicketMapper {
     //根据 列车id 以及 座位类型 获取 座位号
     List<String> selectSeatLocationByTrainIdAndSeatType(@Param("trainid") Integer trainid, @Param("seattype") String seattype);
 
+    //根据 始发站 和 终点站 获取 车票发车时间
+    List<String> selectStartTimeByStation(@Param("startstation") String startstation, @Param("endstation") String endstation);
 }

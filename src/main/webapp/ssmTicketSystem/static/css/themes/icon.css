@@ -113,8 +113,17 @@
 	background:url('icons/ticket.png') no-repeat center center;
 }
 .icon-buyticket{
-	 background:url('icons/buyticket.png') no-repeat center center;
+	background:url('icons/buyticket.png') no-repeat center center;
 }
 .icon-buy{
 	background:url('icons/buy.png') no-repeat center center;
+}
+.icon-order{
+	background:url('icons/order.png') no-repeat center center;
+}
+.icon-exchange{
+	background:url('icons/exchange.png') no-repeat center center;
+}
+.icon-returnticket{
+	background:url('icons/returnticket.png') no-repeat center center;
 }

@@ -148,4 +148,38 @@ public class TicketServiceImpl implements TicketService {
     public Ticket getOneTicketInfo(Integer ticketid) {
         return ticketMapper.selectByPrimaryKey(ticketid);
     }
+
+
+    /**
+     * 根据 始发站 和 终点站 获取 车票发车时间
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @return List<String>
+     */
+    @Override
+    public List<String> getStartTimeByStation(String startstation, String endstation) {
+        return ticketMapper.selectStartTimeByStation(startstation, endstation);
+    }
+
+
+    /**
+     * 据所选始发站、终点站、发车时间 获取 唯一始终站台信息
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @param starttime    发车时间
+     * @return List<Ticket>
+     */
+    @Override
+    public List<Ticket> getNewTicket(String startstation, String endstation, String starttime) {
+        TicketExample example = new TicketExample();
+        TicketExample.Criteria criteria = example.createCriteria();
+        criteria.andTicketStartstationEqualTo(startstation);
+        criteria.andTicketEndstationEqualTo(endstation);
+        criteria.andTicketStarttimeEqualTo(starttime);
+        List<Ticket> tickets = null;
+        tickets = ticketMapper.selectByExample(example);
+        return tickets;
+    }
 }

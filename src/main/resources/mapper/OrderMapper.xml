@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdou.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.gdou.domain.Order">
+        <id column="orderid" jdbcType="VARCHAR" property="orderid"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="order_username" jdbcType="VARCHAR" property="orderUsername"/>
+        <result column="order_idcardname" jdbcType="VARCHAR" property="orderIdcardname"/>
+        <result column="order_idcardnumber" jdbcType="VARCHAR" property="orderIdcardnumber"/>
+        <result column="ticketid" jdbcType="INTEGER" property="ticketid"/>
+        <result column="order_trainname" jdbcType="VARCHAR" property="orderTrainname"/>
+        <result column="order_startstation" jdbcType="VARCHAR" property="orderStartstation"/>
+        <result column="order_endstation" jdbcType="VARCHAR" property="orderEndstation"/>
+        <result column="order_starttime" jdbcType="VARCHAR" property="orderStarttime"/>
+        <result column="order_arrivetime" jdbcType="VARCHAR" property="orderArrivetime"/>
+        <result column="order_price" jdbcType="DOUBLE" property="orderPrice"/>
+        <result column="ordertime" jdbcType="VARCHAR" property="ordertime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="seatid" jdbcType="INTEGER" property="seatid"/>
+        <result column="order_carriage" jdbcType="INTEGER" property="orderCarriage"/>
+        <result column="order_seattype" jdbcType="VARCHAR" property="orderSeattype"/>
+        <result column="order_seatlocation" jdbcType="VARCHAR" property="orderSeatlocation"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    orderid, userid, order_username, order_idcardname, order_idcardnumber, ticketid, 
+    order_trainname, order_startstation, order_endstation, order_starttime, order_arrivetime, 
+    order_price, ordertime, status, seatid, order_carriage, order_seattype, order_seatlocation
+  </sql>
+    <select id="selectByExample" parameterType="com.gdou.domain.OrderExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from ts_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ts_order
+        where orderid = #{orderid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ts_order
+    where orderid = #{orderid,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.gdou.domain.OrderExample">
+        delete from ts_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.gdou.domain.Order">
+    insert into ts_order (orderid, userid, order_username, 
+      order_idcardname, order_idcardnumber, ticketid, 
+      order_trainname, order_startstation, order_endstation, 
+      order_starttime, order_arrivetime, order_price, 
+      ordertime, status, seatid, 
+      order_carriage, order_seattype, order_seatlocation
+      )
+    values (#{orderid,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{orderUsername,jdbcType=VARCHAR},
+      #{orderIdcardname,jdbcType=VARCHAR}, #{orderIdcardnumber,jdbcType=VARCHAR}, #{ticketid,jdbcType=INTEGER}, 
+      #{orderTrainname,jdbcType=VARCHAR}, #{orderStartstation,jdbcType=VARCHAR}, #{orderEndstation,jdbcType=VARCHAR}, 
+      #{orderStarttime,jdbcType=VARCHAR}, #{orderArrivetime,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DOUBLE},
+      #{ordertime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{seatid,jdbcType=INTEGER},
+      #{orderCarriage,jdbcType=INTEGER}, #{orderSeattype,jdbcType=VARCHAR}, #{orderSeatlocation,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.gdou.domain.Order">
+        insert into ts_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderid != null">
+                orderid,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="orderUsername != null">
+                order_username,
+            </if>
+            <if test="orderIdcardname != null">
+                order_idcardname,
+            </if>
+            <if test="orderIdcardnumber != null">
+                order_idcardnumber,
+            </if>
+            <if test="ticketid != null">
+                ticketid,
+            </if>
+            <if test="orderTrainname != null">
+                order_trainname,
+            </if>
+            <if test="orderStartstation != null">
+                order_startstation,
+            </if>
+            <if test="orderEndstation != null">
+                order_endstation,
+            </if>
+            <if test="orderStarttime != null">
+                order_starttime,
+            </if>
+            <if test="orderArrivetime != null">
+                order_arrivetime,
+            </if>
+            <if test="orderPrice != null">
+                order_price,
+            </if>
+            <if test="ordertime != null">
+                ordertime,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="seatid != null">
+                seatid,
+            </if>
+            <if test="orderCarriage != null">
+                order_carriage,
+            </if>
+            <if test="orderSeattype != null">
+                order_seattype,
+            </if>
+            <if test="orderSeatlocation != null">
+                order_seatlocation,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderid != null">
+                #{orderid,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="orderUsername != null">
+                #{orderUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="orderIdcardname != null">
+                #{orderIdcardname,jdbcType=VARCHAR},
+            </if>
+            <if test="orderIdcardnumber != null">
+                #{orderIdcardnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="ticketid != null">
+                #{ticketid,jdbcType=INTEGER},
+            </if>
+            <if test="orderTrainname != null">
+                #{orderTrainname,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStartstation != null">
+                #{orderStartstation,jdbcType=VARCHAR},
+            </if>
+            <if test="orderEndstation != null">
+                #{orderEndstation,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStarttime != null">
+                #{orderStarttime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderArrivetime != null">
+                #{orderArrivetime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                #{orderPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="ordertime != null">
+                #{ordertime,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="seatid != null">
+                #{seatid,jdbcType=INTEGER},
+            </if>
+            <if test="orderCarriage != null">
+                #{orderCarriage,jdbcType=INTEGER},
+            </if>
+            <if test="orderSeattype != null">
+                #{orderSeattype,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSeatlocation != null">
+                #{orderSeatlocation,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.gdou.domain.OrderExample" resultType="java.lang.Long">
+        select count(*) from ts_order
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update ts_order
+        <set>
+            <if test="record.orderid != null">
+                orderid = #{record.orderid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userid != null">
+                userid = #{record.userid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderUsername != null">
+                order_username = #{record.orderUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderIdcardname != null">
+                order_idcardname = #{record.orderIdcardname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderIdcardnumber != null">
+                order_idcardnumber = #{record.orderIdcardnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ticketid != null">
+                ticketid = #{record.ticketid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderTrainname != null">
+                order_trainname = #{record.orderTrainname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderStartstation != null">
+                order_startstation = #{record.orderStartstation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderEndstation != null">
+                order_endstation = #{record.orderEndstation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderStarttime != null">
+                order_starttime = #{record.orderStarttime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderArrivetime != null">
+                order_arrivetime = #{record.orderArrivetime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderPrice != null">
+                order_price = #{record.orderPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.ordertime != null">
+                ordertime = #{record.ordertime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.seatid != null">
+                seatid = #{record.seatid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderCarriage != null">
+                order_carriage = #{record.orderCarriage,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderSeattype != null">
+                order_seattype = #{record.orderSeattype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderSeatlocation != null">
+                order_seatlocation = #{record.orderSeatlocation,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update ts_order
+        set orderid = #{record.orderid,jdbcType=VARCHAR},
+        userid = #{record.userid,jdbcType=INTEGER},
+        order_username = #{record.orderUsername,jdbcType=VARCHAR},
+        order_idcardname = #{record.orderIdcardname,jdbcType=VARCHAR},
+        order_idcardnumber = #{record.orderIdcardnumber,jdbcType=VARCHAR},
+        ticketid = #{record.ticketid,jdbcType=INTEGER},
+        order_trainname = #{record.orderTrainname,jdbcType=VARCHAR},
+        order_startstation = #{record.orderStartstation,jdbcType=VARCHAR},
+        order_endstation = #{record.orderEndstation,jdbcType=VARCHAR},
+        order_starttime = #{record.orderStarttime,jdbcType=VARCHAR},
+        order_arrivetime = #{record.orderArrivetime,jdbcType=VARCHAR},
+        order_price = #{record.orderPrice,jdbcType=DOUBLE},
+        ordertime = #{record.ordertime,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=VARCHAR},
+        seatid = #{record.seatid,jdbcType=INTEGER},
+        order_carriage = #{record.orderCarriage,jdbcType=INTEGER},
+        order_seattype = #{record.orderSeattype,jdbcType=VARCHAR},
+        order_seatlocation = #{record.orderSeatlocation,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gdou.domain.Order">
+        update ts_order
+        <set>
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="orderUsername != null">
+                order_username = #{orderUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="orderIdcardname != null">
+                order_idcardname = #{orderIdcardname,jdbcType=VARCHAR},
+            </if>
+            <if test="orderIdcardnumber != null">
+                order_idcardnumber = #{orderIdcardnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="ticketid != null">
+                ticketid = #{ticketid,jdbcType=INTEGER},
+            </if>
+            <if test="orderTrainname != null">
+                order_trainname = #{orderTrainname,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStartstation != null">
+                order_startstation = #{orderStartstation,jdbcType=VARCHAR},
+            </if>
+            <if test="orderEndstation != null">
+                order_endstation = #{orderEndstation,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStarttime != null">
+                order_starttime = #{orderStarttime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderArrivetime != null">
+                order_arrivetime = #{orderArrivetime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                order_price = #{orderPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="ordertime != null">
+                ordertime = #{ordertime,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="seatid != null">
+                seatid = #{seatid,jdbcType=INTEGER},
+            </if>
+            <if test="orderCarriage != null">
+                order_carriage = #{orderCarriage,jdbcType=INTEGER},
+            </if>
+            <if test="orderSeattype != null">
+                order_seattype = #{orderSeattype,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSeatlocation != null">
+                order_seatlocation = #{orderSeatlocation,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where orderid = #{orderid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gdou.domain.Order">
+    update ts_order
+    set userid = #{userid,jdbcType=INTEGER},
+      order_username = #{orderUsername,jdbcType=VARCHAR},
+      order_idcardname = #{orderIdcardname,jdbcType=VARCHAR},
+      order_idcardnumber = #{orderIdcardnumber,jdbcType=VARCHAR},
+      ticketid = #{ticketid,jdbcType=INTEGER},
+      order_trainname = #{orderTrainname,jdbcType=VARCHAR},
+      order_startstation = #{orderStartstation,jdbcType=VARCHAR},
+      order_endstation = #{orderEndstation,jdbcType=VARCHAR},
+      order_starttime = #{orderStarttime,jdbcType=VARCHAR},
+      order_arrivetime = #{orderArrivetime,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      ordertime = #{ordertime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      seatid = #{seatid,jdbcType=INTEGER},
+      order_carriage = #{orderCarriage,jdbcType=INTEGER},
+      order_seattype = #{orderSeattype,jdbcType=VARCHAR},
+      order_seatlocation = #{orderSeatlocation,jdbcType=VARCHAR}
+    where orderid = #{orderid,jdbcType=VARCHAR}
+  </update>
+
+    <!--根据用户id获取所有订单-->
+    <select id="selectAllOrderInfo" resultType="com.gdou.domain.Order">
+    SELECT   *
+    FROM     ts_order
+    WHERE    userid = #{userid,jdbcType=INTEGER} AND status != '已删除'
+    LIMIT    #{offset,jdbcType=INTEGER} , #{limit,jdbcType=INTEGER};
+  </select>
+
+    <!--删除订单（修改status）-->
+    <update id="deleteOrderInfo" parameterType="java.lang.String">
+    UPDATE ts_order SET status = '已删除' WHERE orderid = #{orderid,jdbcType=VARCHAR}
+  </update>
+</mapper>

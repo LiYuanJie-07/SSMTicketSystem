@@ -373,4 +373,11 @@
     FROM ts_seat
     WHERE trainid = #{trainid,jdbcType=INTEGER} AND seattype = #{seattype,jdbcType=VARCHAR} AND status = 0;
   </select>
+
+
+  <!--根据 始发站 和 终点站 获取 车票发车时间-->
+  <select id="selectStartTimeByStation" resultType="java.lang.String">
+    SELECT ticket_starttime FROM ts_ticket
+    WHERE ticket_startstation = #{startstation,jdbcType=VARCHAR} AND ticket_endstation = #{endstation,jdbcType=VARCHAR};
+  </select>
 </mapper>

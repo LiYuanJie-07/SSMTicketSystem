@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,4 +108,50 @@ public class TicketController extends BasicController {
             return Msg.success("共查找到 " + tickets.size() + " 条记录").add("searchTicketInfo", easyUIData);
         }
     }
+
+
+    /**
+     * 根据 始发站 和 终点站 获取 车票发车时间
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @return List<Map < String, String>>
+     */
+    @RequestMapping(value = "/getStartTimeByStation", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, String>> getStartTimeByStation(String startstation, String endstation) {
+        List<String> startTime = ticketService.getStartTimeByStation(startstation, endstation);
+        //包装成EasyUI需要的格式：id：选项id，text：选项文本
+        List<Map<String, String>> easyUIComboboxList = new ArrayList<>();
+        for (int i = 0; i < startTime.size(); i++) {
+            Map<String, String> easyUIData = new HashMap<String, String>();
+            easyUIData.put("id", startTime.get(i));
+            easyUIData.put("text", startTime.get(i));
+            easyUIComboboxList.add(easyUIData);
+        }
+        return easyUIComboboxList;
+    }
+
+
+    /**
+     * 据所选始发站、终点站、发车时间 获取 唯一新车票（用于改签操作）
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @param starttime    发车时间
+     * @return Msg
+     */
+    @RequestMapping(value = "/getNewTicket", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getNewTicket(String startstation, String endstation, String starttime) {
+        List<Ticket> tickets = ticketService.getNewTicket(startstation, endstation, starttime);
+        if (tickets == null || tickets.size() == 0) {
+            return Msg.fail("获取新车票信息失败！");
+        } else {
+            Ticket ticket = tickets.get(0);
+            return Msg.success("获取新车票信息成功！").add("ticket", ticket);
+        }
+
+    }
+
 }

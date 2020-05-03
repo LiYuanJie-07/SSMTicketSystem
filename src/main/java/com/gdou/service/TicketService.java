@@ -87,4 +87,25 @@ public interface TicketService {
      * @return Ticket 车票信息
      */
     Ticket getOneTicketInfo(Integer ticketid);
+
+
+    /**
+     * 根据 始发站 和 终点站 获取 车票发车时间
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @return List<String>
+     */
+    List<String> getStartTimeByStation(String startstation, String endstation);
+
+
+    /**
+     * 据所选始发站、终点站、发车时间 获取 唯一始终站台信息
+     *
+     * @param startstation 始发站
+     * @param endstation   终点站
+     * @param starttime    发车时间
+     * @return List<Ticket>
+     */
+    List<Ticket> getNewTicket(String startstation, String endstation, String starttime);
 }
