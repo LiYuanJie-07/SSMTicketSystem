@@ -78,12 +78,14 @@ $(document).ready(function () {
             //清空输入
             $("#order-seattype").textbox('clear');
             $("#order-seatlocation").textbox('clear');
+            $("#order-seatlocation").combobox({
+                disabled: true
+            });
             $("#order-price").text('');
             //打开模态框
             $('#dlg-userTicket-add').dialog('open');
         }
     });
-
 
 
     var ticket_seatid;
