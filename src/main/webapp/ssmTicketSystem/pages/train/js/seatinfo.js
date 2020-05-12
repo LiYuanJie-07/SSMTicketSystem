@@ -57,8 +57,6 @@ $(document).ready(function () {
     // 新增按钮点击事件
     $("#btn-seatinfo-add").click(function (e) {
         e.preventDefault();
-        //如果启动行编辑则取消
-        $('#dg-seatinfo').datagrid('endEdit', index);
         // 取消行选中
         $('#dg-seatinfo').datagrid('clearChecked');
         //清空新增输入框内容
