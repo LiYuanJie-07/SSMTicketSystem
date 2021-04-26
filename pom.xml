@@ -47,7 +47,7 @@
         <servlet.version>2.5</servlet.version>
         <!--文件上传解析器版本-->
         <commons.version>1.4</commons.version>
-        <commons.io.version>2.6</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <!--分页插件版本-->
         <pagehelper.version>5.1.10</pagehelper.version>
         <!--shiro框架-->
