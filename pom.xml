@@ -57,7 +57,7 @@
         <!--二维码-->
         <qrcode.version>3.1.0</qrcode.version>
         <!-- excel操作api-->
-        <poi.version>3.17</poi.version>
+        <poi.version>4.1.1</poi.version>
 
 
     </properties>
